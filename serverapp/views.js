@@ -14,7 +14,6 @@ exports.blogIndex = function (req, res) {
 
   var walker = walk.walk('blog'),
       files = new Array(),
-      urls = new Array(),
       fileName,
       slug;
 
@@ -41,8 +40,8 @@ exports.blogIndex = function (req, res) {
 
 exports.blogPost = function (req, res) {
   var slug = req.params.pslug;
-  var post = fs.readFileSync('blog/' + slug + ".md");
-  var markdown = marked(fs.readFileSync('blog/' + slug + ".md"));
+  // var markdown = marked(fs.readFileSync('blog/' + slug + ".md")); TODO — why doesn't this work?
+  var markdown = fs.readFileSync('blog/' + slug + ".md");
   res.render('post', {
     pageTitle: 'blog', 
     bodyId: 'post',
