@@ -5,6 +5,10 @@ var path = require('path'),
   // slug = require('slugger'), TODO — why can't it find this?
   fs = require('fs')
 
+marked.setOptions({
+  santize: false
+});
+
 // homepage
 exports.index = function (req, res) {
   res.render('index', {pageTitle: 'home', bodyId: 'home'});
@@ -39,15 +43,19 @@ exports.blogIndex = function (req, res) {
 };
 
 exports.blogPost = function (req, res) {
-  var slug = req.params.pslug;
-  // var markdown = marked(fs.readFileSync('blog/' + slug + ".md")); TODO — why doesn't this work?
-  var markdown = fs.readFileSync('blog/' + slug + ".md");
-  res.render('post', {
-    pageTitle: 'blog', 
-    bodyId: 'post',
-    slug: slug,
-    content: markdown
-  });
+  var slug = req.params.pslug, markdown;
+  fs.readFile('blog/' + slug + '.md', 'utf8', function(err, data){
+    markdown = marked(data);
+    render(markdown);
+  })
+  function render(markdown) {
+    res.render('post', {
+      pageTitle: 'blog', 
+      bodyId: 'post',
+      slug: slug,
+      content: markdown
+    });
+  };
   logger.info('Blog post requested: ' + slug);
 };
 
