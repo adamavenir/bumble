@@ -5,10 +5,6 @@ var path = require('path'),
   // slug = require('slugger'), TODO — why can't it find this?
   fs = require('fs')
 
-marked.setOptions({
-  santize: false
-});
-
 // homepage
 exports.index = function (req, res) {
   res.render('index', {pageTitle: 'home', bodyId: 'home'});
