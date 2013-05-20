@@ -1,0 +1,27 @@
+{
+  "name": "adambrault.com",
+  "version": "0.0.1",
+  "homepage": "https://github.com/adambrault/adambrault.com",
+  "repository": {
+    "type": "git", 
+    "url": "git@github.com:adambrault/adambrault.com.git"
+  },
+  "description": "Staring point for express projects",
+  "dependencies": {
+    "async": "",
+    "connect": "",
+    "express": "",
+    "jade": "",
+    "stitch": "",
+    "underscore": "",
+    "winston": "",
+    "semi-static": "",
+    "getconfig": "",
+    "marked": "",
+    "slugger": "",
+    "walk": "",
+    "foundation": "",
+    "express-stitch": ""
+  },
+  "main": "server.js"
+}

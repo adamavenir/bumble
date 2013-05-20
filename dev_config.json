@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://localhost:3000",
+  "http": {
+    "port": 3000
+  }
+}

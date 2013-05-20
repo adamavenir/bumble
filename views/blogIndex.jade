@@ -1,0 +1,6 @@
+body(id= bodyId)
+  h1= pageTitle
+  ul.posts
+    each post in postList
+      li
+        a(href= '/' + urlPath + post)= post
