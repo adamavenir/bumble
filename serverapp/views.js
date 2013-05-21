@@ -1,9 +1,11 @@
-var path = require('path'),
-  logger = require('winston'),
-  walk = require('walk'),
-  marked = require('marked')
-  // slug = require('slugger'), TODO — why can't it find this?
-  fs = require('fs')
+var path  = require('path'),
+  logger  = require('winston'),
+  walk    = require('walk'),
+  marked  = require('marked')
+  sugar   = require('sugar'),
+  jf      = require('jsonfile'),
+  util    = require('util'),
+  fs      = require('fs')
 
 // homepage
 exports.index = function (req, res) {
@@ -13,26 +15,42 @@ exports.index = function (req, res) {
 exports.blogIndex = function (req, res) {
 
   var walker = walk.walk('blog'),
-      files = new Array(),
-      fileName,
-      slug;
+      truncate = sugar.truncate,
+      posts = new Array(),
+      postData = {};
 
   walker.on("file", function(root,file,next){
-    // get the file, but remove file extension
-    var file = file['name'].substring(0, file['name'].lastIndexOf('.'));
-    // push without /blog prefix
-    fileName = file.substring(file.indexOf('/'));
-    // slug = slug.slugger(file)
-    files.push(fileName);
-    next();
+    var ext = file['name'].slice(-2);
+    logger.info('ext: ' + ext)
+
+    if (ext == 'md') {
+
+      // get the file, but remove file extension
+      var file = file['name'].substring(0, file['name'].lastIndexOf('.'));
+      logger.info('file: ' + file);
+
+      var slug = file.substring(0);
+      logger.info('slug: ' + slug)
+
+      jf.readFile('blog/' + slug + '.json', function(err, obj){
+        postData = obj;
+        logger.info('postData: ' + util.inspect(postData));
+        posts.push(postData);
+        logger.info('posts: '+ util.inspect(posts));
+        next();
+      })
+    }
+    else {
+      next();
+    }
   });
 
   walker.on("end", function() {
     res.render('blogIndex', { 
       pageTitle: 'All posts', 
       bodyId: 'archive',
-      postList: files,
-      urlPath: 'blog/'
+      postData: posts,
+      postUrl: '/blog/'
     });
   });
 

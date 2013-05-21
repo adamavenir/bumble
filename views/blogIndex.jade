@@ -1,6 +1,7 @@
 body(id= bodyId)
   h1= pageTitle
-  ul.posts
-    each post in postList
+  ol.posts
+    each post in postData
       li
-        a(href= '/' + urlPath + post)= post
+        a(href= postUrl + post.slug)= post.title
+        span= post.date
