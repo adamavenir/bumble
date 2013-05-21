@@ -26,6 +26,7 @@ For each post, add matching ``.json`` files with the following format:
 ```
 
 ## Todo:
+- Date-based archives
 - Smarter loading of local files
 - Import from Tumblr
 - Support for HTML posts
