@@ -2,7 +2,6 @@ var path  = require('path'),
   logger  = require('winston'),
   walk    = require('walk'),
   marked  = require('marked')
-  sugar   = require('sugar'),
   jf      = require('jsonfile'),
   util    = require('util'),
   fs      = require('fs')
@@ -15,28 +14,31 @@ exports.index = function (req, res) {
 exports.blogIndex = function (req, res) {
 
   var walker = walk.walk('blog'),
-      truncate = sugar.truncate,
       posts = new Array(),
       postData = {};
 
   walker.on("file", function(root,file,next){
-    var ext = file['name'].slice(-2);
-    logger.info('ext: ' + ext)
 
+    // pop off the last two characters
+    var ext = file['name'].slice(-2);
+
+    // does the file end in md?
     if (ext == 'md') {
 
-      // get the file, but remove file extension
+      // get the file object, but remove file extension
       var file = file['name'].substring(0, file['name'].lastIndexOf('.'));
-      logger.info('file: ' + file);
 
+      // isolate the file name
       var slug = file.substring(0);
-      logger.info('slug: ' + slug)
 
+      // read the JSON metadata associated with each post
       jf.readFile('blog/' + slug + '.json', function(err, obj){
         postData = obj;
-        logger.info('postData: ' + util.inspect(postData));
+
+        // add the metadata to the post array
         posts.push(postData);
-        logger.info('posts: '+ util.inspect(posts));
+
+        // go to the next file
         next();
       })
     }
@@ -58,19 +60,34 @@ exports.blogIndex = function (req, res) {
 
 exports.blogPost = function (req, res) {
   var slug = req.params.pslug, markdown;
+
+  // get the file based on the slug in the request
   fs.readFile('blog/' + slug + '.md', 'utf8', function(err, data){
     markdown = marked(data);
-    render(markdown);
+    getData(slug, markdown);
   })
-  function render(markdown) {
+
+  // get the JSON data based on the slug
+  function getData (slug, markdown) {
+      jf.readFile('blog/' + slug + '.json', function(err, obj){
+      postData = obj;
+      render (slug, markdown, postData);
+    })
+  };
+
+  // render markdown and JSON metadata
+  function render(slug, markdown, postData) {
     res.render('post', {
       pageTitle: 'blog', 
       bodyId: 'post',
       slug: slug,
-      content: markdown
+      content: markdown,
+      title: postData.title,
+      date: postData.date,
+      author: postData.author
     });
   };
-  logger.info('Blog post requested: ' + slug);
+
 };
 
 // 404
