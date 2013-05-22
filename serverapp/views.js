@@ -26,18 +26,88 @@ exports.index = function (req, res) {
 }; 
 
 exports.blogIndex = function (req, res) {
-  if (typeof postData === 'undefined') {
-    logger.info('No postData here yet');
-    // parsePosts();
-  }
-  else {
+  res.render('blogIndex', { 
+    pageTitle: 'All posts', 
+    bodyId: 'archive',
+    postData: postData,
+    postUrl: '/blog/'
+  });
+};
+
+exports.blogYearIndex = function (req, res) {
+  var year  = req.params.year,
+      month = req.params.month,
+      day   = req.params.day,
+      posts = new Array();
+
+  for (var i = 0; i < postData.length; i++) {
+
+    var postYear = Date.create(postData[i].date).format('{yyyy}');
+
+    if (postYear == year) {
+      posts.push(postData[i]);
+    }
+  };
+
+  res.render('blogIndex', { 
+    pageTitle: 'Year Archive', 
+    bodyId: 'archive',
+    postData: posts,
+    postUrl: '/blog/' + year + '/'
+  });
+
+};
+
+exports.blogMonthIndex = function (req, res) {
+  var year  = req.params.year,
+      month = req.params.month,
+      posts = new Array();
+
+  for (var i = 0; i < postData.length; i++) {
+
+    var postYear = Date.create(postData[i].date).format('{yyyy}');
+    var postMonth = Date.create(postData[i].date).format('{MM}');
+
+    if (postYear == year && postMonth == month) {
+      logger.info('dates match for ' + postData[i].title)
+      posts.push(postData[i]);
+    }
+    else
+      logger.info('No match — year: ' + postYear + " (" + year + ") | month: " + postMonth + " (" + month + ")");
+  };
+
+  res.render('blogIndex', { 
+    pageTitle: 'Month Archive', 
+    bodyId: 'archive',
+    postData: posts,
+    postUrl: '/blog/' + year + '/' + month + '/'
+  });
+};
+
+
+exports.blogDateIndex = function (req, res) {
+  var year  = req.params.year,
+      month = req.params.month,
+      day   = req.params.day,
+      posts = new Array();
+
+  for (var i = 0; i < postData.length; i++) {
+
+    var postYear = Date.create(postData[i].date).format('{yyyy}');
+    var postMonth = Date.create(postData[i].date).format('{MM}');
+    var postDay = Date.create(postData[i].date).format('{dd}');
+
+    if (postYear == year && postMonth == month && postDay == day) {
+      posts.push(postData[i]);
+    }
+  };
+  
     res.render('blogIndex', { 
-      pageTitle: 'All posts', 
+      pageTitle: 'Date Archive', 
       bodyId: 'archive',
-      postData: postData,
-      postUrl: '/blog/'
+      postData: posts,
+      postUrl: '/blog/' + year + '/' + month + '/' + day + '/'
     });
-  }
 };
 
 exports.blogPost = function (req, res) {

@@ -25,8 +25,11 @@ app.get('/post/:tid/:tslug', function(req, res) {
     logger.info('Request:  ' + config.baseUrl + req.url + '\n>>>>> Redirect: ' + config.baseUrl + '/' + slug)
 });
 
-// blog post index
+// blog post indexes
 app.get('/blog', views.blogIndex);
+app.get('/blog/:year', views.blogYearIndex);
+app.get('/blog/:year/:month', views.blogMonthIndex);
+app.get('/blog/:year/:month/:day', views.blogDateIndex);
 
 // blog posts
 app.get('/blog/:pslug', views.blogPost);
