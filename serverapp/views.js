@@ -13,6 +13,8 @@ parsePosts.on('ready', function(posts) {
     postData = posts;
 });
 
+parsePosts.setup();
+
 // homepage
 exports.index = function (req, res) {
   res.render('index', {
@@ -23,7 +25,8 @@ exports.index = function (req, res) {
 
 exports.blogIndex = function (req, res) {
   if (typeof postData === 'undefined') {
-    parsePosts();
+    logger.info('No postData here yet');
+    // parsePosts();
   }
   else {
     res.render('blogIndex', postData, { 

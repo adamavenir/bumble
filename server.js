@@ -26,7 +26,7 @@ app.get('/post/:tid/:tslug', function(req, res) {
 });
 
 // blog post index
-app.get('/blog', views.blogIndex());
+app.get('/blog', views.blogIndex);
 
 // blog posts
 app.get('/blog/:pslug', views.blogPost);
