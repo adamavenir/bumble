@@ -19,6 +19,7 @@ function ParsePosts() {
 ParsePosts.prototype = new EventEmitter();
 
 ParsePosts.prototype.setup = function () {
+  var self = this;
 
   walker.on("file", function(root,file,next){
 
@@ -45,15 +46,15 @@ ParsePosts.prototype.setup = function () {
         logger.info('03 postDate: ' + postDate + ' (from timestamp)');
 
       };
-      logger.info('51 postSlug is ' + postSlug);
+
       // read the JSON metadata associated with each post
       jf.readFile(__dirname + '/../blog/' + postDateText + '-' + postSlug + '.json', function (err, obj) {
-        // if (err) { logger.error("Bonk", util.inspect(err); }
+        if (err) { logger.error("Bonk" + util.inspect(err)) };
         logger.info('04 reading file: ' + __dirname + '/../blog/' + postDateText + '-' + postSlug + '.json')
 
         logger.info('05 obj: ' + obj + ' | postDate: ' + postDate + ' | postSlug: ' + postSlug);
 
-        postData = obj;
+        var postData = obj;
         logger.info('06 postData: ' + postData + ' | postDate: ' + postDate + ' | postSlug: ' + postSlug);
         postData.date = postDate;
         postData.slug = postSlug;
@@ -66,7 +67,7 @@ ParsePosts.prototype.setup = function () {
         logger.info('   - - - - - - - - - - - - - - - ')
       })      
 
-      logger.info(util.inspect(posts));
+      //logger.info(util.inspect(posts));
 
     }
     else {
@@ -75,7 +76,9 @@ ParsePosts.prototype.setup = function () {
   });
 
   walker.on("end", function() {
+    logger.info(util.inspect(posts));
     self.emit('ready', posts)
+    logger.info('<<EMIT!>> <<EMIT!>> Ohboy. I think I just emit.')
   });
 
 }

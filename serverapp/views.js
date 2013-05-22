@@ -9,7 +9,9 @@ var parsePosts  = new (require('./ParsePost'))();
 var postData;
 
 // parse and load the post files into memory
-parsePosts.on('ready', function(posts) { 
+parsePosts.on('ready', function(posts) {
+    logger.info("got ready event from parsePosts");
+    logger.info(util.inspect(posts)); 
     postData = posts;
 });
 
@@ -29,7 +31,7 @@ exports.blogIndex = function (req, res) {
     // parsePosts();
   }
   else {
-    res.render('blogIndex', postData, { 
+    res.render('blogIndex', { 
       pageTitle: 'All posts', 
       bodyId: 'archive',
       postData: postData,
