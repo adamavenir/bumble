@@ -11,6 +11,7 @@ A very simple personal website and blog. (Work in progress!)
 - Read JSON files with the same name as Markdown files for post metatada.
 - Serve any static files provided in ``views/static``.
 - Provide an index of available blog posts at ``/blog`` based on contents of ``blog`` directory.
+- Date-based archives
 
 ## Howto
 Put a markdown file in the ``blog`` directory in this format:
@@ -28,12 +29,12 @@ For each post, add matching ``.json`` files with the following format:
 ```
 
 ## Todo:
-- Date-based archives
-- Import from Tumblr
-- Support for HTML posts
 - RSS
+- Configurable blog path
 - Basic template
 - Styling
+- Import from Tumblr
+- Support for HTML posts
 - Compile to static HTML
 - Automagic typography
 - Fallbacks for posts without JSON
