@@ -13,21 +13,22 @@ A very simple personal website and blog. (Work in progress!)
 - Provide an index of available blog posts at ``/blog`` based on contents of ``blog`` directory.
 
 ## Howto
-Put ``.md`` (markdown) file in the ``blog`` directory.
+Put a markdown file in the ``blog`` directory in this format:
+
+```
+YYYY-MM-DD-this-is-the-name-of-the-post.md
+```
 
 For each post, add matching ``.json`` files with the following format:
 ```
 {
   "title": "Another post about how much I love to blog about blog posts",
   "author": "Adam Brault",
-  "date": "2013-02-27",
-  "slug": "another-post"
 }
 ```
 
 ## Todo:
 - Date-based archives
-- Smarter loading of local files
 - Import from Tumblr
 - Support for HTML posts
 - RSS
