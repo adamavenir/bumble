@@ -17,12 +17,7 @@ exports.blogIndex = function (req, res) {
   var walker = walk.walk('blog'),
       endsWith = sugar.endsWith,
       dateFormat = /(\d{4})\-((0|1)\d)\-((0|1|2|3)\d)-/,
-      posts = new Array(),
-      postData = {},
-      postDate = "",
-      postSlug = "",
-      postDateTeaxt = "";
-      // , postDate, postSlug, postDateText;
+      posts = new Array(), postDate, postSlug, postDateText;
 
   walker.on("file", function(root,file,next){
 
@@ -32,8 +27,8 @@ exports.blogIndex = function (req, res) {
       logger.info('01 matches .md');
 
       // set the slug to the filename
-      // postSlug = file['name'].remove(dateFormat).remove('.md');
-      postSlug = 'readme';
+      postSlug = file['name'].remove(dateFormat).remove('.md');
+      // var postSlug = 'readme';
       logger.info('02 postSlug: ' + postSlug);      
 
       // does it start with the proper date format? (YYYY-MM-DD)
@@ -49,26 +44,29 @@ exports.blogIndex = function (req, res) {
         logger.info('03 postDate: ' + postDate + ' (from timestamp)');
 
       };
-
+      logger.info('51 postSlug is ' + postSlug);
       // read the JSON metadata associated with each post
-      jf.readFile('blog/' + postDateText + '-' + postSlug + '.json', function (err, obj, postDate, postSlug) {
-
-        logger.info('04 reading file: blog/' + postDateText + '-' + postSlug + '.json')
+      jf.readFile(__dirname + '/../blog/' + postDateText + '-' + postSlug + '.json', function (err, obj) {
+        // if (err) { logger.error("Bonk", util.inspect(err); }
+        logger.info('04 reading file: ' + __dirname + '/../blog/' + postDateText + '-' + postSlug + '.json')
 
         logger.info('05 obj: ' + obj + ' | postDate: ' + postDate + ' | postSlug: ' + postSlug);
 
         postData = obj;
         logger.info('06 postData: ' + postData + ' | postDate: ' + postDate + ' | postSlug: ' + postSlug);
-        // postData.date = postDate;
-        // postData.slug = postSlug;
+        postData.date = postDate;
+        postData.slug = postSlug;
 
         // add the metadata to the post array
         posts.push(postData);
+        
 
         // go to the next file
         next();
         logger.info('   - - - - - - - - - - - - - - - ')
       })      
+
+      logger.info(util.inspect(posts));
 
     }
     else {
