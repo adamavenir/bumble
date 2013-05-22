@@ -4,7 +4,7 @@ A very simple personal website and blog. (Work in progress!)
 
 ![](http://f.cl.ly/items/2P210d0M2B0v3Z3q1R03/bumble.jpg)
 
-# bumble can!
+## bumble can!
 
 - Read Tumblr URLs and ``301 Redirect``
 - Serve Markdown data from ``blog`` directory using jade templates.
@@ -12,7 +12,7 @@ A very simple personal website and blog. (Work in progress!)
 - Serve any static files provided in ``views/static``.
 - Provide an index of available blog posts at ``/blog`` based on contents of ``blog`` directory.
 
-# Howto
+## Howto
 Put ``.md`` (markdown) file in the ``blog`` directory.
 
 For each post, add matching ``.json`` files with the following format:
@@ -25,7 +25,11 @@ For each post, add matching ``.json`` files with the following format:
 }
 ```
 
-# Todo:
+## Todo:
+- Date-based archives
+- Smarter loading of local files
+- Import from Tumblr
+- Support for HTML posts
 - RSS
 - Basic template
 - Styling
