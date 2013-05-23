@@ -32,7 +32,7 @@ app.get('/blog/:year/:month', views.blogMonthIndex);
 app.get('/blog/:year/:month/:day', views.blogDateIndex);
 
 // blog posts
-app.get('/blog/:pslug', views.blogPost);
+app.get('/blog/:year/:month/:day/:pslug', views.blogPost);
 
 // TODO
 // quotes, talks, links, tools, apps, music, micro

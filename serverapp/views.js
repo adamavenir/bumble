@@ -1,6 +1,7 @@
 var logger  = require('winston'),
     marked  = require('marked'),
     sugar   = require('sugar'),
+    jf      = require('jsonfile'),
     util    = require('util'),
     fs      = require('fs');
 
@@ -30,7 +31,6 @@ exports.blogIndex = function (req, res) {
     pageTitle: 'All posts', 
     bodyId: 'archive',
     postData: postData,
-    postUrl: '/blog/'
   });
 };
 
@@ -50,10 +50,9 @@ exports.blogYearIndex = function (req, res) {
   };
 
   res.render('blogIndex', { 
-    pageTitle: 'Year Archive', 
+    pageTitle: 'All of ' + year, 
     bodyId: 'archive',
     postData: posts,
-    postUrl: '/blog/' + year + '/'
   });
 
 };
@@ -77,13 +76,11 @@ exports.blogMonthIndex = function (req, res) {
   };
 
   res.render('blogIndex', { 
-    pageTitle: 'Month Archive', 
+    pageTitle: 'All of ' + Date.create(month + '-' + year).format('{Month}, {yyyy}'),
     bodyId: 'archive',
     postData: posts,
-    postUrl: '/blog/' + year + '/' + month + '/'
   });
 };
-
 
 exports.blogDateIndex = function (req, res) {
   var year  = req.params.year,
@@ -103,40 +100,46 @@ exports.blogDateIndex = function (req, res) {
   };
   
     res.render('blogIndex', { 
-      pageTitle: 'Date Archive', 
+      pageTitle: Date.create(year + '-' + month + '-' + day).format('{Month} {d}, {yyyy}'), 
       bodyId: 'archive',
       postData: posts,
-      postUrl: '/blog/' + year + '/' + month + '/' + day + '/'
     });
 };
 
 exports.blogPost = function (req, res) {
-  var slug = req.params.pslug, markdown;
+  var slug = req.params.pslug, 
+      year  = req.params.year,
+      month = req.params.month,
+      day   = req.params.day,
+      markdown;
+
+  var fullSlug = year + '-' + month + '-' + day + '-' + slug;
 
   // get the file based on the slug in the request
-  fs.readFile('blog/' + slug + '.md', 'utf8', function(err, data){
+  fs.readFile('blog/' + fullSlug + '.md', 'utf8', function(err, data){
+    logger.info('reading file: blog/' + fullSlug + '.md');
     markdown = marked(data);
     getData(slug, markdown);
   })
 
   // get the JSON data based on the slug
   function getData (slug, markdown) {
-      jf.readFile('blog/' + slug + '.json', function(err, obj){
-      postData = obj;
-      render (slug, markdown, postData);
+      jf.readFile('blog/' + fullSlug + '.json', function(err, obj){
+      var postContent = obj;
+      render (slug, markdown, postContent);
     })
   };
 
   // render markdown and JSON metadata
-  function render(slug, markdown, postData) {
+  function render(slug, markdown, postContent) {
     res.render('post', {
       pageTitle: 'blog', 
       bodyId: 'post',
       slug: slug,
       content: markdown,
-      title: postData.title,
-      date: postData.date,
-      author: postData.author
+      title: postContent.title,
+      date: postContent.date,
+      author: postContent.author
     });
   };
 

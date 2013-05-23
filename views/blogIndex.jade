@@ -3,5 +3,5 @@ body(id= bodyId)
   ol.posts
     each post in postData
       li
-        a(href= postUrl + post.slug)= post.title 
+        a(href= post.url)= post.title 
         span= post.date

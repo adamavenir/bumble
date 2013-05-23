@@ -58,6 +58,7 @@ ParsePosts.prototype.setup = function () {
         logger.info('06 postData: ' + postData + ' | postDate: ' + postDate + ' | postSlug: ' + postSlug);
         postData.date = postDate;
         postData.slug = postSlug;
+        postData.url = '/blog/' + Date.create(postDateText).format('{yyyy}/{MM}/{dd}/') + postSlug;
 
         // add the metadata to the post array
         posts.push(postData);
