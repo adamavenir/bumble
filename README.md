@@ -14,7 +14,27 @@ A very simple personal website and blog. (Work in progress!)
 - Date-based archives
 
 ## Howto
-Put a markdown file in the ``blog`` directory in this format:
+Set your defaults in ``dev_config.json``
+
+```
+{
+  "blogTitle": "example.com",
+  "blogSubtitle": "This is my tagline, just so you know.",
+  "siteUrl": "http://example.com",
+  "rssUrl": "http://example.com/feed/rss",
+  "postDir": "blog",
+  "blogHome": "/",
+
+  "baseUrl": "https://localhost:3000",
+  "http": {
+    "port": 3000
+  }
+}
+```
+
+``blogHome`` will accept routes like ``/`` or ``/blog`` or ``/somethingelse/``. Just make sure whatever you use starts and ends with a slash. :)
+
+Put a markdown file in the ``blog`` directory (or whichever you've chosen in ``postDir``) in this format:
 
 ```
 YYYY-MM-DD-this-is-the-name-of-the-post.md

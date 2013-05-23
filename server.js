@@ -25,14 +25,17 @@ app.get('/post/:tid/:tslug', function(req, res) {
     logger.info('Request:  ' + config.baseUrl + req.url + '\n>>>>> Redirect: ' + config.baseUrl + '/' + slug)
 });
 
+var home = config.blogHome;
+if (home == '/') { home == '' };
+
 // blog post indexes
-app.get('/blog', views.blogIndex);
-app.get('/blog/:year', views.blogYearIndex);
-app.get('/blog/:year/:month', views.blogMonthIndex);
-app.get('/blog/:year/:month/:day', views.blogDateIndex);
+app.get(home, views.blogIndex);
+app.get(home + ':year', views.blogYearIndex);
+app.get(home + ':year/:month', views.blogMonthIndex);
+app.get(home + ':year/:month/:day', views.blogDateIndex);
 
 // blog posts
-app.get('/blog/:year/:month/:day/:pslug', views.blogPost);
+app.get(home + ':year/:month/:day/:pslug', views.blogPost);
 
 // TODO
 // quotes, talks, links, tools, apps, music, micro
