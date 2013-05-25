@@ -34,6 +34,7 @@ exports.blogIndex = function (req, res) {
   res.render('blogIndex', { 
     pageTitle: 'All posts', 
     blogTitle: config.blogTitle,
+    blogSubtitle: config.blogSubtitle,
     bodyId: 'archive',
     postData: postData,
   });
@@ -66,6 +67,7 @@ exports.blogYearIndex = function (req, res) {
   res.render('blogIndex', { 
     pageTitle: 'All of ' + year, 
     blogTitle: config.blogTitle,
+    blogSubtitle: config.blogSubtitle,
     bodyId: 'archive',
     postData: posts,
   });
@@ -93,6 +95,7 @@ exports.blogMonthIndex = function (req, res) {
   res.render('blogIndex', { 
     pageTitle: 'All of ' + Date.create(month + '-' + year).format('{Month}, {yyyy}'),
     blogTitle: config.blogTitle,
+    blogSubtitle: config.blogSubtitle,
     bodyId: 'archive',
     postData: posts,
   });
@@ -135,6 +138,7 @@ exports.blogPost = function (req, res) {
   res.render('post', {
     pageTitle: thisPost.title, 
     blogTitle: config.blogTitle,
+    blogSubtitle: config.blogSubtitle,
     bodyId: 'post',
     slug: slug,
     title: thisPost.title,

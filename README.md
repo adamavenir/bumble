@@ -54,11 +54,13 @@ For each post, add matching ``.json`` files with the following format:
 ```
 
 ## Todo:
+- Starter styling
+- Pagination
+- Breadcrumbs
 - Persona authentication
 - Smarter Tumblr redirect
 - Basic template
 - "New post" form
-- Styling
 - Import from Tumblr
 - Support for HTML posts
 - Compile to static HTML
