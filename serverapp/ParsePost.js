@@ -61,12 +61,9 @@ ParsePosts.prototype.setup = function () {
 
           jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postSlug + '.json', function (err, obj) {
             if (err) { logger.error("Bonk" + util.inspect(err)) };
-            // logger.info('04 reading file: ' + __dirname + '/../' + dir + '/' + postDateText + '-' + postSlug + '.json')
-
-            // logger.info('05 obj: ' + obj + ' | postDate: ' + postDate + ' | postSlug: ' + postSlug);
 
             var postData = obj;
-            // logger.info('06 postData: ' + postData + ' | postDate: ' + postDate + ' | postSlug: ' + postSlug);
+            
             postData.date = postDate;
             postData.slug = postSlug;
             postData.fullSlug = postDateText + '-' + postSlug;

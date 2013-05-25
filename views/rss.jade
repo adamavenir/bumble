@@ -17,4 +17,4 @@ rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
         name= post.author
         uri= post.siteUrl
       content(type="")
-        <![CDATA[#{post.content}]]>
+        <![CDATA[!{post.postBody}]]>
