@@ -2,7 +2,9 @@ var express     = require('express'),
     connect     = require('connect'),
     logger      = require('winston'),
     semiStatic  = require('semi-static'),
-    config      = require('getconfig');
+    config      = require('getconfig'),
+    passport    = require('passport'), 
+    LocalStrategy = require('passport-persona').Strategy;
 
 var views       = require('./serverapp/views');
 
@@ -15,8 +17,25 @@ app.configure(function () {
     app.use(express.bodyParser());
 });
 
+passport.use(new PersonaStrategy({
+    audience: config.siteUrl
+  },
+  function(email, done) {
+    User.findByEmail({ email: email }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+
 // use jade
 app.set('view engine', 'jade');
+
+app.post('/auth/browserid', 
+  passport.authenticate('persona', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // 301 redirects for old tumblr blog posts
 app.get('/post/:tid/:tslug', function(req, res) {
