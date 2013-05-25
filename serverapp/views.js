@@ -1,4 +1,4 @@
-var logger  = require('winston'),
+var logger  = require('bucker'),
     marked  = require('marked'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),

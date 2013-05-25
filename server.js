@@ -1,6 +1,6 @@
 var express     = require('express'),
     connect     = require('connect'),
-    logger      = require('winston'),
+    logger      = require('bucker'),
     semiStatic  = require('semi-static'),
     config      = require('getconfig');
 
