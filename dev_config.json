@@ -5,6 +5,7 @@
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "blog",
   "blogHome": "/",
+  "maxPosts": "10",
 
   "baseUrl": "https://localhost:3000",
   "http": {

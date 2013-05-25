@@ -25,6 +25,9 @@ app.get('/post/:tid/:tslug', function(req, res) {
     logger.info('Request:  ' + config.baseUrl + req.url + '\n>>>>> Redirect: ' + config.baseUrl + '/' + slug)
 });
 
+// rss
+app.get('/rss', views.rss);
+
 var home = config.blogHome;
 if (home == '/') { home == '' };
 
@@ -40,7 +43,7 @@ app.get(home + ':year/:month/:day/:pslug', views.blogPost);
 // TODO
 // quotes, talks, links, tools, apps, music, micro
 
-// app views
+// home
 app.get('/', views.index);
 
 // semi-static views

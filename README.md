@@ -7,11 +7,13 @@ A very simple personal website and blog. (Work in progress!)
 ## bumble can!
 
 - Read Tumblr URLs and ``301 Redirect``
-- Serve Markdown data from ``blog`` directory using jade templates.
-- Read JSON files with the same name as Markdown files for post metatada.
-- Serve any static files provided in ``views/static``.
-- Provide an index of available blog posts at ``/blog`` based on contents of ``blog`` directory.
-- Date-based archives
+- Serve Markdown data from ``blog`` directory using jade templates
+- Read JSON files with the same name as Markdown files for post metatada
+- Serve any static files provided in ``views/static``
+- Provide an index of available blog posts at ``/blog`` based on contents of ``blog`` directory
+- Provide date-based archives
+– Serve RSS
+– Serve a configurable number of posts on the home page and RSS
 
 ## Howto
 Set your defaults in ``dev_config.json``
@@ -24,6 +26,7 @@ Set your defaults in ``dev_config.json``
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "blog",
   "blogHome": "/",
+  "maxPosts": "10",
 
   "baseUrl": "https://localhost:3000",
   "http": {
@@ -31,6 +34,8 @@ Set your defaults in ``dev_config.json``
   }
 }
 ```
+
+``maxPosts`` will set the maximum number of posts available on the main page and RSS feed.
 
 ``blogHome`` will accept routes like ``/`` or ``/blog`` or ``/somethingelse/``. Just make sure whatever you use starts and ends with a slash. :)
 
@@ -50,7 +55,6 @@ For each post, add matching ``.json`` files with the following format:
 
 ## Todo:
 - RSS
-- Configurable blog path
 - Basic template
 - Styling
 - Import from Tumblr

@@ -3,7 +3,9 @@ var logger  = require('winston'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
     util    = require('util'),
-    fs      = require('fs');
+    fs      = require('fs'),
+    _       = require('underscore'),
+    config  = require('getconfig');
 
 var parsePosts  = new (require('./ParsePost'))();
 
@@ -14,6 +16,7 @@ parsePosts.on('ready', function(posts) {
     logger.info("got ready event from parsePosts");
     logger.info(util.inspect(posts)); 
     postData = posts;
+    postSetData = _.first(posts, [config.maxPosts]);
 });
 
 parsePosts.setup();
@@ -33,6 +36,15 @@ exports.blogIndex = function (req, res) {
     postData: postData,
   });
 };
+
+// rss
+exports.rss = function (req, res) {
+  res.set('Content-Type', 'text/xml');
+  res.render('rss', {
+    postData: postSetData,
+  });
+}; 
+
 
 exports.blogYearIndex = function (req, res) {
   var year  = req.params.year,
@@ -81,6 +93,7 @@ exports.blogMonthIndex = function (req, res) {
     postData: posts,
   });
 };
+
 
 exports.blogDateIndex = function (req, res) {
   var year  = req.params.year,
@@ -142,7 +155,6 @@ exports.blogPost = function (req, res) {
       author: postContent.author
     });
   };
-
 };
 
 // 404
