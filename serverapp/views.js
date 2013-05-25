@@ -1,4 +1,4 @@
-var logger  = require('bucker'),
+var logger  = require('winston'),
     marked  = require('marked'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
@@ -30,8 +30,10 @@ exports.index = function (req, res) {
 }; 
 
 exports.blogIndex = function (req, res) {
+  logger.info(config.blogTitle);
   res.render('blogIndex', { 
     pageTitle: 'All posts', 
+    blogTitle: config.blogTitle,
     bodyId: 'archive',
     postData: postData,
   });
@@ -63,6 +65,7 @@ exports.blogYearIndex = function (req, res) {
 
   res.render('blogIndex', { 
     pageTitle: 'All of ' + year, 
+    blogTitle: config.blogTitle,
     bodyId: 'archive',
     postData: posts,
   });
@@ -89,6 +92,7 @@ exports.blogMonthIndex = function (req, res) {
 
   res.render('blogIndex', { 
     pageTitle: 'All of ' + Date.create(month + '-' + year).format('{Month}, {yyyy}'),
+    blogTitle: config.blogTitle,
     bodyId: 'archive',
     postData: posts,
   });
@@ -129,7 +133,8 @@ exports.blogPost = function (req, res) {
   var thisPost = _.findWhere(postData, {fullSlug: thisSlug });
 
   res.render('post', {
-    pageTitle: 'blog', 
+    pageTitle: thisPost.title, 
+    blogTitle: config.blogTitle,
     bodyId: 'post',
     slug: slug,
     title: thisPost.title,

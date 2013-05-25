@@ -1,0 +1,9 @@
+!!!5
+head
+  link(rel="stylesheet", href="/css/main.css")
+  - if (locals.pageTitle)
+    title!= locals.pageTitle + ' | ' + locals.blogTitle
+  - else
+    title locals.blogTitle
+block body
+  body(id= locals.bodyId)
