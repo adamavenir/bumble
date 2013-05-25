@@ -1,6 +1,6 @@
 var EventEmitter = require('events').EventEmitter,
     path    = require('path'),
-    logger  = require('winston'),
+    logger  = require('bucker'),
     walk    = require('walk'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
@@ -63,7 +63,7 @@ ParsePosts.prototype.setup = function () {
             if (err) { logger.error("Bonk" + util.inspect(err)) };
 
             var postData = obj;
-            
+
             postData.date = postDate;
             postData.slug = postSlug;
             postData.fullSlug = postDateText + '-' + postSlug;

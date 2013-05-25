@@ -1,5 +1,11 @@
-h1= title
-h2= author
-h3= date
+extends layout
 
-div.content!= content
+block body
+  body(id= bodyId)
+    include header
+    article
+      h1= title
+      h2= author
+      h3= date
+
+      div.content!= content
