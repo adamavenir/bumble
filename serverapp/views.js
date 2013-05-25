@@ -13,8 +13,8 @@ var postData;
 
 // parse and load the post files into memory
 parsePosts.on('ready', function(posts) {
-    logger.info("got ready event from parsePosts");
-    logger.info(util.inspect(posts)); 
+    // logger.info("got ready event from parsePosts");
+    // logger.info(util.inspect(posts)); 
     postData = posts;
     postSetData = _.first(posts, [config.maxPosts]);
 });
@@ -123,38 +123,21 @@ exports.blogPost = function (req, res) {
   var slug = req.params.pslug, 
       year  = req.params.year,
       month = req.params.month,
-      day   = req.params.day,
-      markdown;
+      day   = req.params.day;
 
-  var fullSlug = year + '-' + month + '-' + day + '-' + slug;
+  var thisSlug = year + '-' + month + '-' + day + '-' + slug;
+  var thisPost = _.findWhere(postData, {fullSlug: thisSlug });
 
-  // get the file based on the slug in the request
-  fs.readFile('blog/' + fullSlug + '.md', 'utf8', function(err, data){
-    logger.info('reading file: blog/' + fullSlug + '.md');
-    markdown = marked(data);
-    getData(slug, markdown);
-  })
+  res.render('post', {
+    pageTitle: 'blog', 
+    bodyId: 'post',
+    slug: slug,
+    title: thisPost.title,
+    date: thisPost.date,
+    author: thisPost.author,
+    content: thisPost.postBody
+  });
 
-  // get the JSON data based on the slug
-  function getData (slug, markdown) {
-      jf.readFile('blog/' + fullSlug + '.json', function(err, obj){
-      var postContent = obj;
-      render (slug, markdown, postContent);
-    })
-  };
-
-  // render markdown and JSON metadata
-  function render(slug, markdown, postContent) {
-    res.render('post', {
-      pageTitle: 'blog', 
-      bodyId: 'post',
-      slug: slug,
-      content: markdown,
-      title: postContent.title,
-      date: postContent.date,
-      author: postContent.author
-    });
-  };
 };
 
 // 404
