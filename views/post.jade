@@ -3,9 +3,11 @@ extends layout
 block body
   body(id= bodyId)
     include header
-    article
-      h1= title
-      h2= author
-      h3= date
-
-      div.content!= content
+    .row
+      .small-6.large-9.centered.columns
+        h1= title
+        h2= author
+        h3= date
+        div.content!= content
+    footer
+      include nav-archive
