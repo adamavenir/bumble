@@ -65,6 +65,7 @@ ParsePosts.prototype.setup = function () {
             var postData = obj;
 
             postData.date = postDate;
+            postData.formattedDate = Date.create(postDate).format('{Mon} {dd}, {yyyy}');
             postData.slug = postSlug;
             postData.fullSlug = postDateText + '-' + postSlug;
             postData.blogTitle = config.blogTitle;

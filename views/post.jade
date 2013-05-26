@@ -2,12 +2,20 @@ extends layout
 
 block body
   body(id= bodyId)
-    include header
-    .row
-      .small-6.large-9.centered.columns
-        h1= title
-        h2= author
-        h3= date
-        div.content!= content
-    footer
-      include nav-archive
+    .row.large-12.large-centered.small-centered.columns
+      .large-6.large-offset-3.columns
+        include header
+    .row.large-12.large-centered.small-centered.columns
+      article.large-12.columns
+        .large-6.large-offset-3.columns
+          h1(style="margin-top: 0;")= title
+        .row
+          .large-12.columns
+            .large-3.columns(style="text-align: right;")
+              a(href="")= date
+            .large-6.columns
+              div.content!= content
+            .large-5.columns
+    .row.large-12.columns
+      footer
+        include nav-archive

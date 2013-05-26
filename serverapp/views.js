@@ -142,7 +142,7 @@ exports.blogPost = function (req, res) {
     bodyId: 'post',
     slug: slug,
     title: thisPost.title,
-    date: thisPost.date,
+    date: thisPost.formattedDate,
     author: thisPost.author,
     content: thisPost.postBody
   });
