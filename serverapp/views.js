@@ -40,7 +40,12 @@ exports.blogIndex = function (req, res) {
     blogTitle: config.blogTitle,
     blogSubtitle: config.blogSubtitle,
     bodyId: 'archive',
-    postData: postData,
+    postData: postData,    
+    blogTitle: config.blogTitle,
+    blogSubtitle: config.blogSubtitle,
+    blogAuthor: config.blogAuthor,
+    gravatar: gravatar,
+    blogBio: config.blogBio  
   });
 };
 
@@ -74,6 +79,11 @@ exports.blogYearIndex = function (req, res) {
     blogSubtitle: config.blogSubtitle,
     bodyId: 'archive',
     postData: posts,
+    blogTitle: config.blogTitle,
+    blogSubtitle: config.blogSubtitle,
+    blogAuthor: config.blogAuthor,
+    gravatar: gravatar,
+    blogBio: config.blogBio    
   });
 
 };
@@ -102,6 +112,11 @@ exports.blogMonthIndex = function (req, res) {
     blogSubtitle: config.blogSubtitle,
     bodyId: 'archive',
     postData: posts,
+    blogTitle: config.blogTitle,
+    blogSubtitle: config.blogSubtitle,
+    blogAuthor: config.blogAuthor,
+    gravatar: gravatar,
+    blogBio: config.blogBio    
   });
 };
 
@@ -127,6 +142,11 @@ exports.blogDateIndex = function (req, res) {
       pageTitle: Date.create(year + '-' + month + '-' + day).format('{Month} {d}, {yyyy}'), 
       bodyId: 'archive',
       postData: posts,
+      blogTitle: config.blogTitle,
+      blogSubtitle: config.blogSubtitle,
+      blogAuthor: config.blogAuthor,
+      gravatar: gravatar,
+      blogBio: config.blogBio
     });
 };
 

@@ -55,6 +55,11 @@ h2
   margin-top: 10px
   text-align: right
 
+.date
+  text-align: right
+  display: block
+  margin-top: 3px
+
 footer
   width: 100%
   background-color: #333
@@ -78,15 +83,31 @@ footer
     display: block
     margin-bottom: 10px
 
+ul, ol
+  padding-left: 50px
+  padding-right: 50px
+
 @media (max-width: 768px)
 
-  .blogTitle
-    padding-top: 20px
-
-  .blogSubTitle
-    padding-bottom: 20px
+  header
+    background-color: #fafafa
+    padding: 5px 0
     border-bottom: 1px solid #eee
-    margin-bottom: 40px
+
+  .blogTitle, .blogSubTitle
+    padding: 0
+    display: inline-block
+    margin-bottom: 0px
+    font-size: 14px
+
+  .blogTitle
+    margin-right: 10px
+
+  .subToMe
+    display: none
+
+  article
+    margin-top: 30px
 
   .permalink
     text-align: left
