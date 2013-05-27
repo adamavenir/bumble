@@ -1,6 +1,9 @@
 {
-  "blogTitle": "example.com",
-  "blogSubtitle": "This is my tagline, just so you know.",
+  "blogTitle": "Adam Brault",
+  "blogSubtitle": "Hey, I just write here.",
+  "blogAuthor": "Adam Brault",
+  "blogAuthorEmail": "adam@andyet.com",
+  "blogBio": "One day, I decided to write a blog. This is the story of that blog.",
   "siteUrl": "http://example.com",
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "blog",

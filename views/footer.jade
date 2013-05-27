@@ -1,0 +1,12 @@
+footer
+  .row
+    .large-3.small-3.columns
+      img.avatar(src=gravatar)
+    .large-5.small-9.columns
+      .about
+        h2 About #{blogAuthor}
+        p= blogBio
+    .large-3.small-9.hide-for-small.columns
+      .archives
+        h2 Blog archives
+        include nav-archive

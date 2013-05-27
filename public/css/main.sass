@@ -2,6 +2,100 @@
 
 body
   font: 17px 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  color: rgb(50,50,50)
 
 h1
   font-size: 24px
+
+.blogTitle
+  padding-top: 40px
+  font-size: 32px
+  margin-bottom: 0
+  // border-bottom: 1px solid #eee
+
+.blogSubTitle
+  padding-bottom: 20px
+  margin-bottom: 60px  
+
+.subToMe
+  position: fixed
+  top: 0
+  right: 0
+  background: rgba(0,0,0,.4)
+  color: #fff
+  border: 0px none
+  padding: 3px 8px
+  font-size: 13px
+  border-radius: 3px
+  cursor: pointer
+
+h2
+  font-size: 20px
+
+h3, h4, h5, h6
+  font-size: 20px
+  font-weight: normal
+
+h3, h4, h5, h6
+  font-weight: normal
+
+// h1, h2, h3, h4, h5, h6
+//   margin-bottom: 0
+
+p
+  margin-bottom: .5em
+
+h2
+  margin-top: 20px
+
+.permalink
+  font-size: 15px
+  font-weight: 800
+  display: block
+  margin-top: 10px
+  text-align: right
+
+footer
+  width: 100%
+  background-color: #333
+  margin-top: 80px
+  padding: 40px 0 40px 0
+  color: #fff
+
+  .avatar
+    width: 100px
+    float: right
+    border: 5px solid #222
+
+  li
+    list-style: none
+
+  h2
+    margin-top: 0
+    color: #fff
+
+  nav a
+    display: block
+    margin-bottom: 10px
+
+@media (max-width: 768px)
+
+  .blogTitle
+    padding-top: 20px
+
+  .blogSubTitle
+    padding-bottom: 20px
+    border-bottom: 1px solid #eee
+    margin-bottom: 40px
+
+  .permalink
+    text-align: left
+    margin-top: 10px
+    margin-bottom: 5px
+    font-size: 14px
+  footer
+    div
+      margin-bottom: 20px
+    .avatar
+      width: 100%
+      float: none

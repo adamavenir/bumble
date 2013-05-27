@@ -3,6 +3,7 @@ var logger  = require('winston'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
     util    = require('util'),
+    gravy   = require('./gravy'),
     fs      = require('fs'),
     _       = require('underscore'),
     config  = require('getconfig');
@@ -10,6 +11,9 @@ var logger  = require('winston'),
 var parsePosts  = new (require('./ParsePost'))();
 
 var postData;
+
+// go get a gravatar
+gravatar = gravy.gravatar(config.blogAuthorEmail, 100);
 
 // parse and load the post files into memory
 parsePosts.on('ready', function(posts) {
@@ -139,6 +143,9 @@ exports.blogPost = function (req, res) {
     pageTitle: thisPost.title, 
     blogTitle: config.blogTitle,
     blogSubtitle: config.blogSubtitle,
+    blogAuthor: config.blogAuthor,
+    gravatar: gravatar,
+    blogBio: config.blogBio,
     bodyId: 'post',
     slug: slug,
     title: thisPost.title,
