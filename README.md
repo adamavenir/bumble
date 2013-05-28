@@ -14,6 +14,7 @@ A very simple personal website and blog. (Work in progress!)
 - Provide date-based archives
 – Serve RSS
 – Serve a configurable number of posts on the home page and RSS
+- Comes with simple, default styles, built on Foundation.
 
 ## Howto
 Set your defaults in ``dev_config.json``
@@ -53,28 +54,30 @@ For each post, add matching ``.json`` files with the following format:
 }
 ```
 
-## Todo:
-- Starter styling
-- Pagination
-- Breadcrumbs
-- Persona authentication
-- Smarter Tumblr redirect
-- Basic template
-- "New post" form
-- Import from Tumblr
+# 0.1 under development
+
 - Support for HTML posts
-- Compile to static HTML
-- Automagic typography
+- Pagination
+- Smarter Tumblr redirect
+- <3 post interaction
+- Import from Tumblr
 - Fallbacks for posts without JSON
-- Make slugs more awesome
-- Add smart redirects
-- +1 post interaction
-- Form for easily adding a new post
-- Form for easily editing posts
-- Home index
-- Quotes
-- Talks
-- Links
-- Photos
-- Videos
-- About
+- Watch directory for changes and update data
+
+# Stuff under consideration
+
+__General stuff:__
+- Compile to static HTML
+- Alternate post types (quotes, photos/sets, videos, links)
+- Rub git at blog server so you can ``git push publish``
+
+__Admin:__
+- Persona authentication
+- Multi-user
+- Configuration
+- "New post" form
+- "Edit post" form
+- "Draft" state posts
+
+__APIs__
+- Pull in other data for moderation +/-
