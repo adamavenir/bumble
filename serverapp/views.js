@@ -1,19 +1,19 @@
-var logger  = require('winston'),
-    marked  = require('marked'),
-    sugar   = require('sugar'),
-    jf      = require('jsonfile'),
-    util    = require('util'),
-    gravy   = require('./gravy'),
-    fs      = require('fs'),
-    _       = require('underscore'),
-    config  = require('getconfig');
+var logger   = require('winston'),
+    marked   = require('marked'),
+    sugar    = require('sugar'),
+    jf       = require('jsonfile'),
+    util     = require('util'),
+    gravatar = require('gravatar'),
+    fs       = require('fs'),
+    _        = require('underscore'),
+    config   = require('getconfig');
 
 var parsePosts  = new (require('./ParsePost'))();
 
 var postData;
 
 // go get a gravatar
-gravatar = gravy.gravatar(config.blogAuthorEmail, 100);
+gravatar = gravatar.url(config.blogAuthorEmail, 100);
 
 // parse and load the post files into memory
 parsePosts.on('ready', function(posts) {
