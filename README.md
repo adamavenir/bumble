@@ -67,7 +67,7 @@ For each post, add matching ``.json`` files with the following format:
 ## Stuff under consideration
 
 __General stuff:__
-- Compile to static HTML
+- Compile to static HTML or put in a database or something
 - Alternate post types (quotes, photos/sets, videos, links)
 - Rub git at blog server so you can ``git push publish``
 
