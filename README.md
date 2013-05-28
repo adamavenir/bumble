@@ -54,7 +54,7 @@ For each post, add matching ``.json`` files with the following format:
 }
 ```
 
-# 0.1 under development
+## 0.1 under development
 
 - Support for HTML posts
 - Pagination
@@ -64,7 +64,7 @@ For each post, add matching ``.json`` files with the following format:
 - Fallbacks for posts without JSON
 - Watch directory for changes and update data
 
-# Stuff under consideration
+## Stuff under consideration
 
 __General stuff:__
 - Compile to static HTML
