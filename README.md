@@ -15,14 +15,18 @@ A very simple personal website and blog. (Work in progress!)
 – Serve RSS
 – Serve a configurable number of posts on the home page and RSS
 - Comes with simple, default styles, built on Foundation.
+- Adds Gravatar based on Author email
 
 ## Howto
 Set your defaults in ``dev_config.json``
 
 ```
 {
-  "blogTitle": "example.com",
-  "blogSubtitle": "This is my tagline, just so you know.",
+  "blogTitle": "Name of blog",
+  "blogSubtitle": "Here's a tag line",
+  "blogAuthor": "Blog Author",
+  "blogAuthorEmail": "author@example.com",
+  "blogBio": "One day, I decided to write a blog. This is the story of that blog.",
   "siteUrl": "http://example.com",
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "blog",
