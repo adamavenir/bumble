@@ -1,0 +1,14 @@
+// yukon watches a folder of markdown, html and json files and returns an object containing a parsed set of them, then keeps that object updated based on changes. also adds in data from a global config
+
+var yukon = new (require('yukon')());
+
+blogDir = 'blog'
+blogHome = '/'
+
+var yukon = yukon(blogDir, blogHome);
+
+var postData;
+
+yukon.on('ready', function (posts) {
+  postData = posts;
+})

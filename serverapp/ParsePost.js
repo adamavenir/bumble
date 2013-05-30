@@ -1,6 +1,6 @@
 var EventEmitter = require('events').EventEmitter,
     path    = require('path'),
-    logger  = require('bucker'),
+    logger  = require('winston'),
     walk    = require('walk'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
@@ -9,84 +9,98 @@ var EventEmitter = require('events').EventEmitter,
     config  = require('getconfig'),
     marked  = require('marked');
 
-var dir = config.postDir,
-    home = config.blogHome,
-    walker = walk.walk(dir),
-    endsWith = sugar.endsWith,
-    dateFormat = /(\d{4})\-((0|1)\d)\-((0|1|2|3)\d)-/,
-    posts = new Array(), postDate, postSlug, postDateText;
+var dir = config.blogDir,
+    home = config.blogHome;
 
-function ParsePosts() {
+var configData = {
+  blogTitle:     config.blogTitle,
+  blogSubTitle:  config.blogSubTitle,
+  siteUrl:       config.siteUrl,
+  rssUrl:        config.rssUrl,
+};
+
+function ParsePosts(dir) {
   EventEmitter.call(this);
 }
 
 ParsePosts.prototype = new EventEmitter();
 
-ParsePosts.prototype.setup = function () {
-  var self = this;
+ParsePosts.prototype.setup = function (blogDir, blogHome) {
+
+  var self = this,
+      dir = blogDir,
+      home = blogHome,
+      walker = walk.walk(dir),
+      dateFormat = /(\d{4})\-((0|1)\d)\-((0|1|2|3)\d)-/,
+      posts = [], 
+      postDate, postSlug, postDateText;
+      mdFiles = [], htmlFiles = [];
+
   if (home == '/') { home == '' };
 
-  walker.on("file", function(root,file,next){
-
-    // does the file have a .md extension?
-    if (file['name'].endsWith('.md')) {
-
-      // logger.info('01 matches .md');
-
-      // set the slug to the filename
-      postSlug = file['name'].remove(dateFormat).remove('.md');
-      // var postSlug = 'readme';
-      // logger.info('02 postSlug: ' + postSlug);      
-
-      // does it start with the proper date format? (YYYY-MM-DD)
-      if (file['name'].startsWith(dateFormat)) {
-        postDateText = file['name'].first(10);
-        postDate = Date.create(postDateText);
-        // logger.info('03 postDate: ' + postDate + ' (from filename)');
-        buildData(postDateText, postSlug);
-      }
-
-      else {
-        // get the date from the file created timestamp
-        postDate = Date.create(fs.stat(dir + '/' + file['name']).ctime);
-        // logger.info('03 postDate: ' + postDate + ' (from timestamp)');
-
-      };
-
-      // read the JSON metadata and markdown associated with each post
-      function buildData (postDateText, postSlug, postMarkdown) {
-        fs.readFile('blog/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
-          // logger.info('reading file: blog/' + postDateText + '.md');
-          var postMarkdown = marked(data);
-
-          jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postSlug + '.json', function (err, obj) {
+  var getData = function (file) {
+    jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postData.slug + '.json', function (err, obj) {
             if (err) { logger.error("Bonk" + util.inspect(err)) };
+  };
 
-            var postData = obj;
+  var md = function (file, fileExt) {
+    logger.info('called markdown processor');
 
-            postData.date = postDate;
-            postData.formattedDate = Date.create(postDate).format('{Mon} {dd}, {yyyy}');
-            postData.slug = postSlug;
-            postData.fullSlug = postDateText + '-' + postSlug;
-            postData.blogTitle = config.blogTitle;
-            postData.blogSubTitle = config.blogSubTitle;
-            postData.siteUrl = config.siteUrl;
-            postData.rssUrl = config.rssUrl;
-            postData.url = home + Date.create(postDateText).format('{yyyy}/{MM}/{dd}/') + postSlug;
-            postData.permalink = config.siteUrl + postData.url;
-            postData.postBody = postMarkdown;
+    var postData = configData;
 
-            // add the metadata to the post array
-            posts.push(postData);
+    if (file['name'].startsWith(dateFormat)) {
+      postData.date = Date.create(file['name'].first(10));
+    }
+    else {
+      // get the date from the file created timestamp
+      postDate = Date.create(fs.stat(dir + '/' + file['name']).ctime);
+    };
 
-            // go to the next file
-            next();
-          });  
-        });    
-      }
+    postData.file      = file['name'].remove('.' + fileExt);
+    postData.slug      = file['name'].remove('.' + fileExt).remove(dateFormat);
+    postData.url = home + Date.create(postData.date).format('{yyyy}/{MM}/{dd}/') + postData.slug;
 
-      //logger.info(util.inspect(posts));
+    postData.permalink = postData.siteUrl + postData.url;
+    jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postData.slug + '.json', function (err, obj) {
+                if (err) { logger.error("Bonk" + util.inspect(err)) };
+    logger.info('postData: ' + util.inspect(posts));                
+    posts.push(postData);
+  };
 
+  var html = function (file, fileExt) {
+    logger.info('called html processor');
+  };
+
+  var json = function (file, fileExt) {
+    logger.info('called json processor');
+  };
+
+  var fileList = {
+    'html': html,
+    'htm': html,
+    'md': md,
+    'markdown': md,
+    'json': json,
+  };
+
+  walker.on("file", function (root, file, next) {
+
+    var fileExt = file['name'].split('.').pop();
+    logger.info('fileExt: ' + fileExt);
+
+    if ( fileExt == 'md' 
+      || fileExt == 'markdown' 
+      ) {
+      mdFiles.push(file);
+      fileList[fileExt](file, fileExt);
+      next();
+    }
+    if ( fileExt == 'html'
+      || fileExt == 'htm'
+      ) {
+      htmlFiles.push(file);
+      fileList[fileExt](file, fileExt);
+      next();
     }
     else {
       next();
@@ -94,9 +108,7 @@ ParsePosts.prototype.setup = function () {
   });
 
   walker.on("end", function() {
-    // logger.info(util.inspect(posts));
     self.emit('ready', posts);
-    // logger.info('<<EMIT!>> <<EMIT!>> Ohboy. I think I just emit.')
   });
 
 }

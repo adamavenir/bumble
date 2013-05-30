@@ -16,9 +16,7 @@ var postData;
 gravatar = gravatar.url(config.blogAuthorEmail, 100);
 
 // parse and load the post files into memory
-parsePosts.on('ready', function(posts) {
-    // logger.info("got ready event from parsePosts");
-    // logger.info(util.inspect(posts)); 
+parsePosts.on('ready', function (posts) {
     postData = posts;
     postSetData = _.first(posts, [config.maxPosts]);
 });
@@ -34,7 +32,6 @@ exports.index = function (req, res) {
 }; 
 
 exports.blogIndex = function (req, res) {
-  logger.info(config.blogTitle);
   res.render('blogIndex', { 
     pageTitle: 'All posts', 
     blogTitle: config.blogTitle,
@@ -45,7 +42,7 @@ exports.blogIndex = function (req, res) {
     blogSubtitle: config.blogSubtitle,
     blogAuthor: config.blogAuthor,
     gravatar: gravatar,
-    blogBio: config.blogBio  
+    blogBio: config.blogBio
   });
 };
 
@@ -62,7 +59,7 @@ exports.blogYearIndex = function (req, res) {
   var year  = req.params.year,
       month = req.params.month,
       day   = req.params.day,
-      posts = new Array();
+      posts = [];
 
   for (var i = 0; i < postData.length; i++) {
 
@@ -91,7 +88,7 @@ exports.blogYearIndex = function (req, res) {
 exports.blogMonthIndex = function (req, res) {
   var year  = req.params.year,
       month = req.params.month,
-      posts = new Array();
+      posts = [];
 
   for (var i = 0; i < postData.length; i++) {
 
@@ -99,7 +96,6 @@ exports.blogMonthIndex = function (req, res) {
     var postMonth = Date.create(postData[i].date).format('{MM}');
 
     if (postYear == year && postMonth == month) {
-      logger.info('dates match for ' + postData[i].title)
       posts.push(postData[i]);
     }
     else
@@ -120,12 +116,11 @@ exports.blogMonthIndex = function (req, res) {
   });
 };
 
-
 exports.blogDateIndex = function (req, res) {
   var year  = req.params.year,
       month = req.params.month,
       day   = req.params.day,
-      posts = new Array();
+      posts = [];
 
   for (var i = 0; i < postData.length; i++) {
 
