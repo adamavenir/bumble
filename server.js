@@ -2,10 +2,13 @@ var express     = require('express'),
     connect     = require('connect'),
     logger      = require('winston'),
     semiStatic  = require('semi-static'),
-    config      = require('getconfig'),
-    _           = require('underscore');
+    config      = require('./serverapp/useconfig'),
+    _           = require('underscore'),
+    env         = require('getconfig');
 
 var views       = require('./serverapp/views');
+
+var blogConfig  = config.file('blogConfig.json');
 
 var app = express();
 
@@ -25,7 +28,7 @@ app.get('/post/:tid/:tslug', views.tumblrRedirect);
 // rss
 app.get('/rss', views.rss);
 
-var home = config.blogHome;
+var home = blogConfig.blogHome;
 if (home == '/') { home == '' };
 
 // blog post indexes
@@ -49,5 +52,5 @@ app.get('/*', semiStatic());
 // 404
 app.get('*', views.notFound);
 
-app.listen(config.http.port);
-logger.info('node server running on port: ' + config.http.port);
+app.listen(env.http.port);
+logger.info('node server running on port: ' + env.http.port);

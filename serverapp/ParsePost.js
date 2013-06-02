@@ -6,10 +6,11 @@ var EventEmitter = require('events').EventEmitter,
     jf      = require('jsonfile'),
     util    = require('util'),
     fs      = require('fs'),
-    config  = require('getconfig'),
+    config  = require('../serverapp/useconfig'),
     marked  = require('marked');
 
-var dir = config.postDir,
+var config = config.file('blogConfig.json'),
+    dir = config.postDir,
     home = config.blogHome,
     walker = walk.walk(dir),
     endsWith = sugar.endsWith,

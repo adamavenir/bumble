@@ -6,21 +6,19 @@ var logger   = require('winston'),
     gravatar = require('gravatar'),
     fs       = require('fs'),
     _        = require('underscore'),
-    config   = require('getconfig');
+    config   = require('../serverapp/useconfig');
 
-var parsePosts  = new (require('./ParsePost'))();
-
-var postData;
+var blogConfig = config.file('blogConfig.json'),
+    parsePosts  = new (require('./ParsePost'))(),
+    postData;
 
 // go get a gravatar
-gravatar = gravatar.url(config.blogAuthorEmail, 100);
+gravatar = gravatar.url(blogConfig.blogAuthorEmail, 100);
 
 // parse and load the post files into memory
 parsePosts.on('ready', function(posts) {
-    // logger.info("got ready event from parsePosts");
-    // logger.info(util.inspect(posts)); 
     postData = posts;
-    postSetData = _.first(posts, [config.maxPosts]);
+    postSetData = _.first(posts, [blogConfig.maxPosts]);
 });
 
 parsePosts.setup();
@@ -42,18 +40,18 @@ exports.tumblrRedirect = function(req, res) {
 };
 
 exports.blogIndex = function (req, res) {
-  logger.info(config.blogTitle);
+  logger.info(blogConfig.blogTitle);
   res.render('blogIndex', { 
     pageTitle: 'All posts', 
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
+    blogTitle: blogConfig.blogTitle,
+    blogSubtitle: blogConfig.blogSubtitle,
     bodyId: 'archive',
     postData: postData,    
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
+    blogTitle: blogConfig.blogTitle,
+    blogSubtitle: blogConfig.blogSubtitle,
+    blogAuthor: blogConfig.blogAuthor,
     gravatar: gravatar,
-    blogBio: config.blogBio  
+    blogBio: blogConfig.blogBio  
   });
 };
 
@@ -83,15 +81,15 @@ exports.blogYearIndex = function (req, res) {
 
   res.render('blogIndex', { 
     pageTitle: 'All of ' + year, 
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
+    blogTitle: blogConfig.blogTitle,
+    blogSubtitle: blogConfig.blogSubtitle,
     bodyId: 'archive',
     postData: posts,
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
+    blogTitle: blogConfig.blogTitle,
+    blogSubtitle: blogConfig.blogSubtitle,
+    blogAuthor: blogConfig.blogAuthor,
     gravatar: gravatar,
-    blogBio: config.blogBio    
+    blogBio: blogConfig.blogBio    
   });
 
 };
@@ -116,15 +114,15 @@ exports.blogMonthIndex = function (req, res) {
 
   res.render('blogIndex', { 
     pageTitle: 'All of ' + Date.create(month + '-' + year).format('{Month}, {yyyy}'),
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
+    blogTitle: blogConfig.blogTitle,
+    blogSubtitle: blogConfig.blogSubtitle,
     bodyId: 'archive',
     postData: posts,
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
+    blogTitle: blogConfig.blogTitle,
+    blogSubtitle: blogConfig.blogSubtitle,
+    blogAuthor: blogConfig.blogAuthor,
     gravatar: gravatar,
-    blogBio: config.blogBio    
+    blogBio: blogConfig.blogBio    
   });
 };
 
@@ -150,11 +148,11 @@ exports.blogDateIndex = function (req, res) {
       pageTitle: Date.create(year + '-' + month + '-' + day).format('{Month} {d}, {yyyy}'), 
       bodyId: 'archive',
       postData: posts,
-      blogTitle: config.blogTitle,
-      blogSubtitle: config.blogSubtitle,
-      blogAuthor: config.blogAuthor,
+      blogTitle: blogConfig.blogTitle,
+      blogSubtitle: blogConfig.blogSubtitle,
+      blogAuthor: blogConfig.blogAuthor,
       gravatar: gravatar,
-      blogBio: config.blogBio
+      blogBio: blogConfig.blogBio
     });
 };
 
@@ -169,11 +167,11 @@ exports.blogPost = function (req, res) {
 
   res.render('post', {
     pageTitle: thisPost.title, 
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
+    blogTitle: blogConfig.blogTitle,
+    blogSubtitle: blogConfig.blogSubtitle,
+    blogAuthor: blogConfig.blogAuthor,
     gravatar: gravatar,
-    blogBio: config.blogBio,
+    blogBio: blogConfig.blogBio,
     bodyId: 'post',
     slug: slug,
     title: thisPost.title,
