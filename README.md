@@ -18,7 +18,7 @@ A very simple personal website and blog. (Work in progress!)
 - Adds Gravatar based on Author email
 
 ## Howto
-Set your defaults in ``dev_config.json``
+Set your defaults in ``blogConfig.json``
 
 ```
 {
@@ -31,12 +31,7 @@ Set your defaults in ``dev_config.json``
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "blog",
   "blogHome": "/",
-  "maxPosts": "10",
-
-  "baseUrl": "https://localhost:3000",
-  "http": {
-    "port": 3000
-  }
+  "maxPosts": "10"
 }
 ```
 
@@ -55,11 +50,12 @@ URL slug will be set by the filename. Title will be taken from the first line, i
 
 ## 0.1 under development
 
-- Support for HTML posts
-- Pagination
+- Proper ordering of posts
+- Pagination for home page
+- Pagination for individual posts
 - <3 post interaction
+- Support for HTML posts
 - Import from Tumblr
-- Fallbacks for posts without JSON
 - Watch directory for changes and update data
 
 ## Stuff under consideration
