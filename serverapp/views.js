@@ -46,12 +46,12 @@ exports.blogIndex = function (req, res) {
     blogTitle: blogConfig.blogTitle,
     blogSubtitle: blogConfig.blogSubtitle,
     bodyId: 'archive',
-    postData: postData,    
+    postData: postData,
     blogTitle: blogConfig.blogTitle,
     blogSubtitle: blogConfig.blogSubtitle,
     blogAuthor: blogConfig.blogAuthor,
     gravatar: gravatar,
-    blogBio: blogConfig.blogBio  
+    blogBio: blogConfig.blogBio
   });
 };
 
