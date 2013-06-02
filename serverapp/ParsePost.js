@@ -65,13 +65,13 @@ ParsePosts.prototype.setup = function () {
           if (data.startsWith('#')) {
             postData.title = data.slice(2, data.indexOf('\n'));
             postData.postBody = marked(data.slice(data.indexOf('\n')));
-            logger.info(postData.title + '\n' + postData.postBody);
+            // logger.info(postData.title + '\n' + postData.postBody);
           }
           else {
-            logger.info('No title in this one.');
+            // logger.info('No title in this one.');
             postData.title = data.slice(0, data.indexOf('\n'));
             postData.postBody = marked(data);
-            logger.info(postData.title + '\n' + postData.postBody);
+            // logger.info(postData.title + '\n' + postData.postBody);
           };
 
           // jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postSlug + '.json', function (err, obj) {

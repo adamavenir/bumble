@@ -53,4 +53,4 @@ app.get('/*', semiStatic());
 app.get('*', views.notFound);
 
 app.listen(env.http.port);
-logger.info('node server running on port: ' + env.http.port);
+logger.info('bumble running on port: ' + env.http.port);

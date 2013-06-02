@@ -40,7 +40,7 @@ exports.tumblrRedirect = function(req, res) {
 };
 
 exports.blogIndex = function (req, res) {
-  logger.info(blogConfig.blogTitle);
+  // logger.info(blogConfig.blogTitle);
   res.render('blogIndex', { 
     pageTitle: 'All posts', 
     blogTitle: blogConfig.blogTitle,
