@@ -1,6 +1,6 @@
 var EventEmitter = require('events').EventEmitter,
     path    = require('path'),
-    logger  = require('bucker'),
+    logger  = require('winston'),
     walk    = require('walk'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
@@ -13,6 +13,7 @@ var dir = config.postDir,
     home = config.blogHome,
     walker = walk.walk(dir),
     endsWith = sugar.endsWith,
+    startsWith = sugar.startsWith,
     dateFormat = /(\d{4})\-((0|1)\d)\-((0|1|2|3)\d)-/,
     posts = new Array(), postDate, postSlug, postDateText;
 
@@ -57,12 +58,23 @@ ParsePosts.prototype.setup = function () {
       function buildData (postDateText, postSlug, postMarkdown) {
         fs.readFile('blog/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
           // logger.info('reading file: blog/' + postDateText + '.md');
-          var postMarkdown = marked(data);
 
-          jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postSlug + '.json', function (err, obj) {
-            if (err) { logger.error("Bonk" + util.inspect(err)) };
+          var postData = {};
 
-            var postData = obj;
+          if (data.startsWith('#')) {
+            postData.title = data.slice(2, data.indexOf('\n'));
+            postData.postBody = marked(data.slice(data.indexOf('\n')));
+            logger.info(postData.title + '\n' + postData.postBody);
+          }
+          else {
+            logger.info('No title in this one.');
+            postData.title = data.slice(0, data.indexOf('\n'));
+            postData.postBody = marked(data);
+            logger.info(postData.title + '\n' + postData.postBody);
+          };
+
+          // jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postSlug + '.json', function (err, obj) {
+          //   if (err) { logger.error("Bonk" + util.inspect(err)) };
 
             postData.date = postDate;
             postData.formattedDate = Date.create(postDate).format('{Mon} {dd}, {yyyy}');
@@ -70,18 +82,18 @@ ParsePosts.prototype.setup = function () {
             postData.fullSlug = postDateText + '-' + postSlug;
             postData.blogTitle = config.blogTitle;
             postData.blogSubTitle = config.blogSubTitle;
+            postData.author = config.blogAuthor;
             postData.siteUrl = config.siteUrl;
             postData.rssUrl = config.rssUrl;
             postData.url = home + Date.create(postDateText).format('{yyyy}/{MM}/{dd}/') + postSlug;
             postData.permalink = config.siteUrl + postData.url;
-            postData.postBody = postMarkdown;
 
             // add the metadata to the post array
             posts.push(postData);
 
             // go to the next file
             next();
-          });  
+          // });  
         });    
       }
 

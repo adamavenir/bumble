@@ -2,7 +2,8 @@ var express     = require('express'),
     connect     = require('connect'),
     logger      = require('winston'),
     semiStatic  = require('semi-static'),
-    config      = require('getconfig');
+    config      = require('getconfig'),
+    _           = require('underscore');
 
 var views       = require('./serverapp/views');
 
@@ -17,13 +18,9 @@ app.configure(function () {
 
 // use jade
 app.set('view engine', 'jade');
-
 // 301 redirects for old tumblr blog posts
-app.get('/post/:tid/:tslug', function(req, res) {
-    var slug = req.params.tslug;
-    res.redirect(301, slug)
-    logger.info('Request:  ' + config.baseUrl + req.url + '\n>>>>> Redirect: ' + config.baseUrl + '/' + slug)
-});
+
+app.get('/post/:tid/:tslug', views.tumblrRedirect);
 
 // rss
 app.get('/rss', views.rss);

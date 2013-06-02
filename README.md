@@ -50,19 +50,13 @@ Put a markdown file in the ``blog`` directory (or whichever you've chosen in ``p
 YYYY-MM-DD-this-is-the-name-of-the-post.md
 ```
 
-For each post, add matching ``.json`` files with the following format:
-```
-{
-  "title": "Another post about how much I love to blog about blog posts",
-  "author": "Adam Brault",
-}
-```
+URL slug will be set by the filename. Title will be taken from the first line, if it starts with a "#" or will fall back to "untitled" in the index.
+
 
 ## 0.1 under development
 
 - Support for HTML posts
 - Pagination
-- Smarter Tumblr redirect
 - <3 post interaction
 - Import from Tumblr
 - Fallbacks for posts without JSON
@@ -71,6 +65,7 @@ For each post, add matching ``.json`` files with the following format:
 ## Stuff under consideration
 
 __General stuff:__
+- Support for multiple authors
 - Compile to static HTML or put in a database or something
 - Alternate post types (quotes, photos/sets, videos, links)
 - Rub git at blog server so you can ``git push publish``

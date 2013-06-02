@@ -8,7 +8,7 @@ lib-cov
 *.out
 *.pid
 *.gz
-
+blog/*
 pids
 logs
 results
