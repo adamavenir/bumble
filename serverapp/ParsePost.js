@@ -1,16 +1,16 @@
 var EventEmitter = require('events').EventEmitter,
     path    = require('path'),
-    logger  = require('winston'),
+    env  = require('getconfig'),
+    logger  = require('bucker').createLogger(env.bucker, module),
     walk    = require('walk'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
     util    = require('util'),
     fs      = require('fs'),
-    config  = require('../serverapp/useconfig'),
+    config  = require('../serverapp/useconfig').file('blogConfig.json'),
     marked  = require('marked');
 
-var config = config.file('blogConfig.json'),
-    dir = config.postDir,
+var dir = config.postDir,
     home = config.blogHome,
     walker = walk.walk(dir),
     endsWith = sugar.endsWith,
@@ -33,45 +33,45 @@ ParsePosts.prototype.setup = function () {
     // does the file have a .md extension?
     if (file['name'].endsWith('.md')) {
 
-      // logger.info('01 matches .md');
+      logger.debug('01 matches .md');
 
       // set the slug to the filename
       postSlug = file['name'].remove(dateFormat).remove('.md');
       // var postSlug = 'readme';
-      // logger.info('02 postSlug: ' + postSlug);      
+      logger.debug('02 postSlug: ' + postSlug);      
 
       // does it start with the proper date format? (YYYY-MM-DD)
       if (file['name'].startsWith(dateFormat)) {
         postDateText = file['name'].first(10);
         postDate = Date.create(postDateText);
-        // logger.info('03 postDate: ' + postDate + ' (from filename)');
+        logger.debug('03 postDate: ' + postDate + ' (from filename)');
         buildData(postDateText, postSlug);
       }
 
       else {
         // get the date from the file created timestamp
         postDate = Date.create(fs.stat(dir + '/' + file['name']).ctime);
-        // logger.info('03 postDate: ' + postDate + ' (from timestamp)');
+        logger.debug('03 postDate: ' + postDate + ' (from timestamp)');
 
       };
 
       // read the JSON metadata and markdown associated with each post
       function buildData (postDateText, postSlug, postMarkdown) {
         fs.readFile('blog/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
-          // logger.info('reading file: blog/' + postDateText + '.md');
+          logger.debug('reading file: blog/' + postDateText + '.md');
 
           var postData = {};
 
           if (data.startsWith('#')) {
             postData.title = data.slice(2, data.indexOf('\n'));
             postData.postBody = marked(data.slice(data.indexOf('\n')));
-            // logger.info(postData.title + '\n' + postData.postBody);
+            logger.debug(postData.title + '\n' + postData.postBody);
           }
           else {
-            // logger.info('No title in this one.');
+            logger.debug('No title in this one.');
             postData.title = data.slice(0, data.indexOf('\n'));
             postData.postBody = marked(data);
-            // logger.info(postData.title + '\n' + postData.postBody);
+            logger.debug(postData.title + '\n' + postData.postBody);
           };
 
           // jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postSlug + '.json', function (err, obj) {
