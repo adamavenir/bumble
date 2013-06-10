@@ -17,7 +17,9 @@ gravatar = gravatar.url(blogConfig.blogAuthorEmail, 100);
 
 // parse and load the post files into memory
 parsePosts.on('ready', function(posts) {
-    postData = posts;
+    postData = posts.sort(function (a, b) {
+        return (b.date - a.date);
+    });
     postSetData = _.first(posts, [blogConfig.maxPosts]);
 });
 
