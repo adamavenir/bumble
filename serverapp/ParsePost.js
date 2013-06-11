@@ -86,7 +86,7 @@ ParsePosts.prototype.setup = function () {
 
           return {
               postBody: marked(post),
-              title: metadata.title || lines[0].slice(1).trim(),
+              title: metadata.title || lines[count - 1].slice(1).trim(),
               date: metadata.date ? Date.create(metadata.date) : postDate,
               slug: metadata.slug || postSlug,
               blogTitle: config.blogTitle,
