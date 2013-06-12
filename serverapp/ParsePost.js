@@ -1,16 +1,16 @@
 var EventEmitter = require('events').EventEmitter,
     path    = require('path'),
-    logger  = require('winston'),
+    env  = require('getconfig'),
+    logger  = require('bucker').createLogger(env.bucker, module),
     walk    = require('walk'),
     sugar   = require('sugar'),
     jf      = require('jsonfile'),
     util    = require('util'),
     fs      = require('fs'),
-    config  = require('../serverapp/useconfig'),
+    config  = require('../serverapp/useconfig').file('blogConfig.json'),
     marked  = require('marked');
 
-var config = config.file('blogConfig.json'),
-    dir = config.postDir,
+var dir = config.postDir,
     home = config.blogHome,
     walker = walk.walk(dir),
     endsWith = sugar.endsWith,
@@ -33,67 +33,87 @@ ParsePosts.prototype.setup = function () {
     // does the file have a .md extension?
     if (file['name'].endsWith('.md')) {
 
-      // logger.info('01 matches .md');
+      logger.debug('01 matches .md');
 
       // set the slug to the filename
       postSlug = file['name'].remove(dateFormat).remove('.md');
       // var postSlug = 'readme';
-      // logger.info('02 postSlug: ' + postSlug);      
+      logger.debug('02 postSlug: ' + postSlug);      
 
       // does it start with the proper date format? (YYYY-MM-DD)
       if (file['name'].startsWith(dateFormat)) {
         postDateText = file['name'].first(10);
         postDate = Date.create(postDateText);
-        // logger.info('03 postDate: ' + postDate + ' (from filename)');
+        logger.debug('03 postDate: ' + postDate + ' (from filename)');
         buildData(postDateText, postSlug);
       }
 
       else {
         // get the date from the file created timestamp
         postDate = Date.create(fs.stat(dir + '/' + file['name']).ctime);
-        // logger.info('03 postDate: ' + postDate + ' (from timestamp)');
+        logger.debug('03 postDate: ' + postDate + ' (from timestamp)');
 
       };
 
-      // read the JSON metadata and markdown associated with each post
+      // helper function to check for and load metadata
+      // if the first line of the file does not start with # we return an
+      // empty hash, otherwise we parse until we find a line that does not start with #
+      // metadata should be saved in the form
+      // # key: value
+      function loadMetadata(file) {
+          var lines = file.split('\n');
+          var metadata = {};
+          var post = [];
+          var count = 0;
+          var key, val;
+          if (lines[0].startsWith('#')) {
+              lines.some(function (line) {
+                  if (line.startsWith('#')) {
+                      count++;
+                      var parsed = /(\w+)\:(.*)$/.exec(line);
+                      console.log('LINE:', parsed);
+                      if (parsed) {
+                          metadata[parsed[1].trim()] = parsed[2].trim();
+                      }
+                  } else {
+                      return true;
+                  }
+              });
+              post = lines.slice(count).join('\n');
+          } else {
+              post = lines.join('\n');
+          }
+
+          return {
+              postBody: marked(post),
+              title: metadata.title || lines[count - 1].slice(1).trim(),
+              date: metadata.date ? Date.create(metadata.date) : postDate,
+              slug: metadata.slug || postSlug,
+              blogTitle: config.blogTitle,
+              blogSubTitle: config.blogSubTitle,
+              author: metadata.author || config.blogAuthor,
+              siteUrl: config.siteUrl,
+              rssUrl: config.rssUrl
+          }
+      }
+
+      // read the metadata and markdown associated with each post
       function buildData (postDateText, postSlug, postMarkdown) {
         fs.readFile('blog/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
-          // logger.info('reading file: blog/' + postDateText + '.md');
+          logger.debug('reading file: blog/' + postDateText + '-' + postSlug + '.md');
 
-          var postData = {};
+          var postData = loadMetadata(data);
+          postData.formattedDate = Date.create(postData.date).format('{Mon} {dd}, {yyyy}');
+          postData.fullSlug = Date.create(postData.date).format('{yyyy}-{MM}-{dd}') + '-' + postSlug;
+          postData.url = home + Date.create(postData.date).format('{yyyy}/{MM}/{dd}/') + postSlug;
+          postData.permalink = config.siteUrl + postData.url;
 
-          if (data.startsWith('#')) {
-            postData.title = data.slice(2, data.indexOf('\n'));
-            postData.postBody = marked(data.slice(data.indexOf('\n')));
-            // logger.info(postData.title + '\n' + postData.postBody);
-          }
-          else {
-            // logger.info('No title in this one.');
-            postData.title = data.slice(0, data.indexOf('\n'));
-            postData.postBody = marked(data);
-            // logger.info(postData.title + '\n' + postData.postBody);
-          };
+          // add the metadata to the post array
+          logger.debug(require('util').inspect(postData, false, null, true));
+          posts.push(postData);
 
-          // jf.readFile(__dirname + '/../' + dir + "/" + postDateText + '-' + postSlug + '.json', function (err, obj) {
-          //   if (err) { logger.error("Bonk" + util.inspect(err)) };
-
-            postData.date = postDate;
-            postData.formattedDate = Date.create(postDate).format('{Mon} {dd}, {yyyy}');
-            postData.slug = postSlug;
-            postData.fullSlug = postDateText + '-' + postSlug;
-            postData.blogTitle = config.blogTitle;
-            postData.blogSubTitle = config.blogSubTitle;
-            postData.author = config.blogAuthor;
-            postData.siteUrl = config.siteUrl;
-            postData.rssUrl = config.rssUrl;
-            postData.url = home + Date.create(postDateText).format('{yyyy}/{MM}/{dd}/') + postSlug;
-            postData.permalink = config.siteUrl + postData.url;
-
-            // add the metadata to the post array
-            posts.push(postData);
-
-            // go to the next file
-            next();
+          // go to the next file
+          next();
           // });  
         });    
       }

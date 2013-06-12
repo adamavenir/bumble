@@ -18,7 +18,6 @@
     "express": "~3.2.4",
     "connect": "~2.7.9",
     "express-stitch": "0.0.2",
-    "winston": "~0.7.1",
     "jade": "~0.30.0",
     "foundation": "~4.1.6-1",
     "jsonfile": "0.0.1",
