@@ -43,17 +43,35 @@ exports.tumblrRedirect = function(req, res) {
 
 exports.blogIndex = function (req, res) {
   // logger.info(config.blogTitle);
+  var posts = [], page, pos, maxPage = Math.ceil(postData.length / config.maxPosts);
+  if (req.query.page && !isNaN(Number(req.query.page))) {
+      page = Number(req.query.page);
+      if (page <= maxPage && page > 0) {
+          pos = (page - 1) * config.maxPosts;
+          posts = postData.slice(pos, pos + config.maxPosts);
+      } else {
+          if (page <= 0) {
+              return res.redirect('/?page=1');
+          } else {
+              return res.redirect('/?page=' + maxPage);
+          }
+      }
+  } else {
+      posts = postData.slice(0, config.maxPosts);
+  }
   res.render('blogIndex', { 
     pageTitle: 'All posts', 
     blogTitle: config.blogTitle,
     blogSubtitle: config.blogSubtitle,
     bodyId: 'archive',
-    postData: postData,    
+    postData: posts,
     blogTitle: config.blogTitle,
     blogSubtitle: config.blogSubtitle,
     blogAuthor: config.blogAuthor,
     gravatar: gravatar,
-    blogBio: config.blogBio  
+    blogBio: config.blogBio,
+    totalPosts: postData.length,
+    totalPages: maxPage
   });
 };
 
