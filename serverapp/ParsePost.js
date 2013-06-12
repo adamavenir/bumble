@@ -99,7 +99,7 @@ ParsePosts.prototype.setup = function () {
 
       // read the metadata and markdown associated with each post
       function buildData (postDateText, postSlug, postMarkdown) {
-        fs.readFile('blog/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
+        fs.readFile(config.postDir + '/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
           logger.debug('reading file: blog/' + postDateText + '-' + postSlug + '.md');
 
           var postData = loadMetadata(data);
