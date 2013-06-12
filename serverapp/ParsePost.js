@@ -50,7 +50,7 @@ ParsePosts.prototype.setup = function () {
 
       else {
         // get the date from the file created timestamp
-        postDate = Date.create(fs.stat(dir + '/' + file['name']).ctime);
+        postDate = Date.create(fs.statSync(root + '/' + file['name']).ctime);
         logger.debug('03 postDate: ' + postDate + ' (from timestamp)');
 
       };
