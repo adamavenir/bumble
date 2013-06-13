@@ -50,7 +50,7 @@ ParsePosts.prototype.setup = function () {
 
       else {
         // get the date from the file created timestamp
-        postDate = Date.create(fs.stat(dir + '/' + file['name']).ctime);
+        postDate = Date.create(fs.statSync(root + '/' + file['name']).ctime);
         logger.debug('03 postDate: ' + postDate + ' (from timestamp)');
 
       };
@@ -99,7 +99,7 @@ ParsePosts.prototype.setup = function () {
 
       // read the metadata and markdown associated with each post
       function buildData (postDateText, postSlug, postMarkdown) {
-        fs.readFile(config.postDir + '/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
+        fs.readFile(root + '/' + postDateText + '-' + postSlug + '.md', 'utf8', function(err, data){
           logger.debug('reading file: blog/' + postDateText + '-' + postSlug + '.md');
 
           var postData = loadMetadata(data);
