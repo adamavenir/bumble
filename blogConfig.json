@@ -8,5 +8,5 @@
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "blog",
   "blogHome": "/",
-  "maxPosts": "10"
+  "maxPosts": 10
 }
