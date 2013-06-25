@@ -18,7 +18,7 @@ var dir = config.postDir,
     endsWith = sugar.endsWith,
     startsWith = sugar.startsWith,
     dateFormat = /(\d{4})\-((0|1)\d)\-((0|1|2|3)\d)-/,
-    posts = new Array(), postDate, postSlug, postDateText, files = {};
+    posts = new Array(), postDate, postSlug, postDateText;
 
 function ParsePosts() {
   EventEmitter.call(this);
@@ -134,6 +134,7 @@ ParsePosts.prototype.setup = function () {
     self.emit('ready', posts);
     var watcher = wtchr(config.postDir);
     watcher.on('create', function (filename) {
+        if (!filename.match(/\.md$/)) return;
         var file = filename.replace(config.postDir + '/', '');
         logger.debug('adding new file:', file);
         self.parseFile({ name: file }, function () {
@@ -141,6 +142,7 @@ ParsePosts.prototype.setup = function () {
         });
     });
     watcher.on('change', function (filename) {
+        if (!filename.match(/\.md$/)) return;
         var file = filename.replace(config.postDir + '/', '');
         logger.debug('changing file:', file);
         var postIndex = posts.indexOf(_.findWhere(posts, { fullSlug: file.replace(/\.md$/, '') }));
@@ -150,6 +152,7 @@ ParsePosts.prototype.setup = function () {
         });
     });
     watcher.on('delete', function (filename) {
+        if (!filename.match(/\.md$/)) return;
         var file = filename.replace(config.postDir + '/', '');
         logger.debug('deleting file: %s', file);
         var postIndex = posts.indexOf(_.findWhere(posts, { fullSlug: file.replace(/\.md$/, '') }));
