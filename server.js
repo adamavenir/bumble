@@ -1,14 +1,11 @@
 var express     = require('express'),
-    connect     = require('connect'),
-    logger      = require('winston'),
+    env         = require('getconfig'),
+    logger      = require('bucker').createLogger(env.bucker, module),
     semiStatic  = require('semi-static'),
-    config      = require('./serverapp/useconfig'),
-    _           = require('underscore'),
-    env         = require('getconfig');
+    config      = require('./serverapp/useconfig').file('blogConfig.json'),
+    _           = require('underscore');
 
 var views       = require('./serverapp/views');
-
-var blogConfig  = config.file('blogConfig.json');
 
 var app = express();
 
@@ -17,6 +14,7 @@ app.configure(function () {
     app.use(express['static'](__dirname + '/public'));
     // app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
     app.use(express.bodyParser());
+    app.use(logger.middleware());
 });
 
 // use jade
@@ -28,7 +26,7 @@ app.get('/post/:tid/:tslug', views.tumblrRedirect);
 // rss
 app.get('/rss', views.rss);
 
-var home = blogConfig.blogHome;
+var home = config.blogHome;
 if (home == '/') { home == '' };
 
 // blog post indexes
