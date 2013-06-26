@@ -16,12 +16,20 @@ var parsePosts  = new (require('./ParsePost'))(),
 // go get a gravatar
 gravatar = gravatar.url(config.blogAuthorEmail, 100);
 
-// parse and load the post files into memory
-parsePosts.on('ready', function(posts) {
+function loadPosts(posts) {
     postData = posts.sort(function (a, b) {
         return (b.date - a.date);
     });
     postSetData = _.first(posts, [config.maxPosts]);
+};
+
+// parse and load the post files into memory
+parsePosts.on('ready', function (posts) {
+    loadPosts(posts);
+});
+
+parsePosts.on('update', function (posts) {
+    loadPosts(posts);
 });
 
 parsePosts.setup();
