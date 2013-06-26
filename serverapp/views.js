@@ -7,7 +7,8 @@ var env      = require('getconfig'),
     gravatar = require('gravatar'),
     fs       = require('fs'),
     _        = require('underscore'),
-    config   = require('../serverapp/useconfig').file('blogConfig.json');
+    config   = require('../serverapp/useconfig').file('blogConfig.json'),
+    paginator = require('./paginator');
 
 var parsePosts  = new (require('./ParsePost'))(),
     postData;
@@ -15,22 +16,30 @@ var parsePosts  = new (require('./ParsePost'))(),
 // go get a gravatar
 gravatar = gravatar.url(config.blogAuthorEmail, 100);
 
-// parse and load the post files into memory
-parsePosts.on('ready', function(posts) {
+function loadPosts(posts) {
     postData = posts.sort(function (a, b) {
         return (b.date - a.date);
     });
     postSetData = _.first(posts, [config.maxPosts]);
+};
+
+// parse and load the post files into memory
+parsePosts.on('ready', function (posts) {
+    loadPosts(posts);
+});
+
+parsePosts.on('update', function (posts) {
+    loadPosts(posts);
 });
 
 parsePosts.setup();
 
 // homepage
 exports.index = function (req, res) {
-  res.render('index', {
-    pageTitle: 'home', 
-    bodyId: 'home'
-  });
+    res.render('index', {
+        pageTitle: 'home', 
+        bodyId: 'home'
+    });
 }; 
 
 exports.tumblrRedirect = function(req, res) {
@@ -42,149 +51,154 @@ exports.tumblrRedirect = function(req, res) {
 };
 
 exports.blogIndex = function (req, res) {
-  // logger.info(config.blogTitle);
-  res.render('blogIndex', { 
-    pageTitle: 'All posts', 
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    bodyId: 'archive',
-    postData: postData,    
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
-    gravatar: gravatar,
-    blogBio: config.blogBio
-  });
+    // logger.info(config.blogTitle);
+    paginator.paginate(postData, req, res, function (realPage) {
+        if (realPage) return res.redirect('/?page=' + realPage);
+        res.render('blogIndex', { 
+            pageTitle: 'All posts', 
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            bodyId: 'archive',
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            blogAuthor: config.blogAuthor,
+            gravatar: gravatar,
+            blogBio: config.blogBio
+        });
+    });
 };
 
 // rss
 exports.rss = function (req, res) {
-  res.set('Content-Type', 'text/xml');
-  res.render('rss', {
-    postData: postSetData,
-  });
+    res.set('Content-Type', 'text/xml');
+    res.render('rss', {
+        postData: postSetData,
+    });
 }; 
 
 
 exports.blogYearIndex = function (req, res) {
-  var year  = req.params.year,
-      month = req.params.month,
-      day   = req.params.day,
-      posts = new Array();
+    var year  = req.params.year,
+        month = req.params.month,
+        day   = req.params.day,
+        posts = new Array();
 
-  for (var i = 0; i < postData.length; i++) {
+    for (var i = 0; i < postData.length; i++) {
+        var postYear = Date.create(postData[i].date).format('{yyyy}');
 
-    var postYear = Date.create(postData[i].date).format('{yyyy}');
+        if (postYear == year) {
+            posts.push(postData[i]);
+        }
+    };
 
-    if (postYear == year) {
-      posts.push(postData[i]);
-    }
-  };
-
-  res.render('blogIndex', { 
-    pageTitle: 'All of ' + year, 
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    bodyId: 'archive',
-    postData: posts,
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
-    gravatar: gravatar,
-    blogBio: config.blogBio    
-  });
-
+    paginator.paginate(posts, req, res, function (realPage) {
+        if (realPage) return res.redirect('/' + year + '/?page=' + realPage);
+        res.render('blogIndex', { 
+            pageTitle: 'All of ' + year, 
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            bodyId: 'archive',
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            blogAuthor: config.blogAuthor,
+            gravatar: gravatar,
+            blogBio: config.blogBio
+        });
+    });
 };
 
 exports.blogMonthIndex = function (req, res) {
-  var year  = req.params.year,
-      month = req.params.month,
-      posts = new Array();
+    var year  = req.params.year,
+        month = req.params.month,
+        posts = new Array();
 
-  for (var i = 0; i < postData.length; i++) {
+    for (var i = 0; i < postData.length; i++) {
+        var postYear = Date.create(postData[i].date).format('{yyyy}');
+        var postMonth = Date.create(postData[i].date).format('{MM}');
 
-    var postYear = Date.create(postData[i].date).format('{yyyy}');
-    var postMonth = Date.create(postData[i].date).format('{MM}');
+        if (postYear == year && postMonth == month) {
+            logger.info('dates match for ' + postData[i].title)
+            posts.push(postData[i]);
+        }
+        else
+            logger.info('No match — year: ' + postYear + " (" + year + ") | month: " + postMonth + " (" + month + ")");
+    };
 
-    if (postYear == year && postMonth == month) {
-      logger.info('dates match for ' + postData[i].title)
-      posts.push(postData[i]);
-    }
-    else
-      logger.info('No match — year: ' + postYear + " (" + year + ") | month: " + postMonth + " (" + month + ")");
-  };
+    paginator.paginate(posts, req, res, function (realPage) {
+        if (realPage) return res.redirect('/' + year + '/' + month + '/?page=' + realPage);
 
-  res.render('blogIndex', { 
-    pageTitle: 'All of ' + Date.create(month + '-' + year).format('{Month}, {yyyy}'),
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    bodyId: 'archive',
-    postData: posts,
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
-    gravatar: gravatar,
-    blogBio: config.blogBio    
-  });
+        res.render('blogIndex', { 
+            pageTitle: 'All of ' + Date.create(month + '-' + year).format('{Month}, {yyyy}'),
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            bodyId: 'archive',
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            blogAuthor: config.blogAuthor,
+            gravatar: gravatar,
+            blogBio: config.blogBio    
+        });
+    });
 };
 
 
 exports.blogDateIndex = function (req, res) {
-  var year  = req.params.year,
-      month = req.params.month,
-      day   = req.params.day,
-      posts = new Array();
+    var year  = req.params.year,
+        month = req.params.month,
+        day   = req.params.day,
+        posts = new Array();
 
-  for (var i = 0; i < postData.length; i++) {
+    for (var i = 0; i < postData.length; i++) {
+        var postYear = Date.create(postData[i].date).format('{yyyy}');
+        var postMonth = Date.create(postData[i].date).format('{MM}');
+        var postDay = Date.create(postData[i].date).format('{dd}');
 
-    var postYear = Date.create(postData[i].date).format('{yyyy}');
-    var postMonth = Date.create(postData[i].date).format('{MM}');
-    var postDay = Date.create(postData[i].date).format('{dd}');
+        if (postYear == year && postMonth == month && postDay == day) {
+            posts.push(postData[i]);
+        }
+    };
 
-    if (postYear == year && postMonth == month && postDay == day) {
-      posts.push(postData[i]);
-    }
-  };
-  
-    res.render('blogIndex', { 
-      pageTitle: Date.create(year + '-' + month + '-' + day).format('{Month} {d}, {yyyy}'), 
-      bodyId: 'archive',
-      postData: posts,
-      blogTitle: config.blogTitle,
-      blogSubtitle: config.blogSubtitle,
-      blogAuthor: config.blogAuthor,
-      gravatar: gravatar,
-      blogBio: config.blogBio
+    paginator.paginate(posts, req, res, function (realPage) {
+        if (realPage) return res.redirect('/' + year + '/' + month + '/' + day + '/?page=' + realPage);
+
+        res.render('blogIndex', { 
+            pageTitle: Date.create(year + '-' + month + '-' + day).format('{Month} {d}, {yyyy}'), 
+            bodyId: 'archive',
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            blogAuthor: config.blogAuthor,
+            gravatar: gravatar,
+            blogBio: config.blogBio
+        });
     });
 };
 
 exports.blogPost = function (req, res) {
-  var slug = req.params.pslug, 
-      year  = req.params.year,
-      month = req.params.month,
-      day   = req.params.day;
+    var slug = req.params.pslug, 
+        year  = req.params.year,
+        month = req.params.month,
+        day   = req.params.day;
 
-  var thisSlug = year + '-' + month + '-' + day + '-' + slug;
-  var thisPost = _.findWhere(postData, {fullSlug: thisSlug });
+    var thisSlug = year + '-' + month + '-' + day + '-' + slug;
+    var thisPost = _.findWhere(postData, {fullSlug: thisSlug });
 
-  res.render('post', {
-    pageTitle: thisPost.title, 
-    blogTitle: config.blogTitle,
-    blogSubtitle: config.blogSubtitle,
-    blogAuthor: config.blogAuthor,
-    gravatar: gravatar,
-    blogBio: config.blogBio,
-    bodyId: 'post',
-    slug: slug,
-    title: thisPost.title,
-    date: thisPost.formattedDate,
-    author: thisPost.author,
-    content: thisPost.postBody
-  });
-
+    res.render('post', {
+        pageTitle: thisPost.title, 
+        blogTitle: config.blogTitle,
+        blogSubtitle: config.blogSubtitle,
+        blogAuthor: config.blogAuthor,
+        gravatar: gravatar,
+        blogBio: config.blogBio,
+        bodyId: 'post',
+        slug: slug,
+        title: thisPost.title,
+        date: thisPost.formattedDate,
+        author: thisPost.author,
+        content: thisPost.postBody
+    });
 };
 
 // 404
 exports.notFound = function (req, res) {
-  res.render('404', {status: 404, bodyId: 'fourohfour'});
+    res.render('404', {status: 404, bodyId: 'fourohfour'});
 };
