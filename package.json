@@ -25,7 +25,8 @@
     "watch": "~0.7.0",
     "bucker": "~0.4.0",
     "gravatar": "~1.0.6",
-    "wtchr": "0.0.1"
+    "wtchr": "0.0.1",
+    "yaml": "0.2.3"
   },
   "main": "server.js"
 }

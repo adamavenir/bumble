@@ -11,6 +11,7 @@ var config  = require('../serverapp/useconfig').file('blogConfig.json');
 var wtchr   = require('wtchr');
 var marked  = require('marked');
 var _       = require('underscore');
+var yaml    = require('yaml');
 
 var dir = config.postDir;
 var home = config.blogHome;
@@ -18,7 +19,7 @@ var walker = walk.walk(dir);
 var endsWith = sugar.endsWith;
 var startsWith = sugar.startsWith;
 var dateFormat = /(\d{4})\-((0|1)\d)\-((0|1|2|3)\d)-/;
-var posts = new Array();
+var posts = [];
 var postDate, postSlug, postDateText;
 
 function ParsePosts() {
@@ -53,44 +54,27 @@ ParsePosts.prototype.parseFile = function (file, callback) {
     // metadata should be saved in the form
     // # key: value
     function loadMetadata(file, filename) {
-        var lines = file.split('\n');
         var metadata = {};
-        var post = [];
-        var count = 0;
-        var key, val;
-        var postImage;
-        var postImageURL;
-
-        if (lines[0].startsWith('#')) {
-            lines.some(function (line) {
-                if (line.startsWith('#')) {
-                    count++;
-                    var parsed = /(\w+)\:(.*)$/.exec(line);
-                    if (parsed) {
-                        metadata[parsed[1].trim()] = parsed[2].trim();
-                    }
-                } else {
-                    return true;
-                }
-            });
-            post = lines.slice(count).join('\n');
-        } else {
-            post = lines.join('\n');
+        var post;
+        var markdown_h1_re = /^#\s+(\w+.*)/;
+        var front_matter_re = /^---([\s\S]*)---/;
+        var front_matter = file.match(front_matter_re);
+        if (front_matter) {
+            metadata = yaml.eval(front_matter[1].trim());
+            post = file.split(front_matter_re).pop().trim();
         }
 
-        return {
+        return _.extend({}, metadata, {
             postBody: marked(post),
-            title: metadata.title || lines[count - 1].slice(1).trim(),
+            title: metadata.title || (markdown_h1_re.test(post.trim()) ? post.trim().match(markdown_h1_re)[1] : ""),
             date: metadata.date ? Date.create(metadata.date) : postDate,
             slug: metadata.slug || postSlug,
-            tags: metadata.tags,
             blogTitle: config.blogTitle,
             blogSubTitle: config.blogSubTitle,
             author: metadata.author || config.blogAuthor,
-            author_slug: metadata.author_slug,
             siteUrl: config.siteUrl,
             rssUrl: config.rssUrl
-        };
+        });
     }
 
     // read the metadata and markdown associated with each post
