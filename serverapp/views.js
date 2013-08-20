@@ -174,7 +174,7 @@ exports.blogDateIndex = function (req, res) {
 };
 
 exports.blogPost = function (req, res) {
-    var slug = req.params.pslug, 
+    var slug = req.params.pslug,
         year  = req.params.year,
         month = req.params.month,
         day   = req.params.day;
@@ -183,7 +183,7 @@ exports.blogPost = function (req, res) {
     var thisPost = _.findWhere(postData, {fullSlug: thisSlug });
 
     res.render('post', {
-        pageTitle: thisPost.title, 
+        pageTitle: thisPost.title,
         blogTitle: config.blogTitle,
         blogSubtitle: config.blogSubtitle,
         blogAuthor: config.blogAuthor,
@@ -194,7 +194,8 @@ exports.blogPost = function (req, res) {
         title: thisPost.title,
         date: thisPost.formattedDate,
         author: thisPost.author,
-        content: thisPost.postBody
+        content: thisPost.postBody,
+        type: thisPost.type
     });
 };
 
