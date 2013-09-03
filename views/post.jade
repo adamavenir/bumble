@@ -3,7 +3,7 @@ extends layout
 block body
   body(id= bodyId)
     include header
-    article
+    article(class=type)
       .row
         a.permalink.large-3.columns(href="")= date       
         .large-7.columns
