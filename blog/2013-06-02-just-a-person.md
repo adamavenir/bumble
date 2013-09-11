@@ -1,9 +1,11 @@
-#date: 2013-06-02 22:04:39 GMT
-#slug: just-a-person
-#tumblr_post_url: http://adambrault.com/post/52004360603/just-a-person
-#tags: 
-#title: just a person
-#type: text
+---
+date: 2013-06-02 22:04:39 GMT
+slug: just-a-person
+tumblr_post_url: http://adambrault.com/post/52004360603/just-a-person
+tags: 
+title: just a person
+type: text
+---
 
 At the conclusion of this year's JSConf, Chris Williams held an open discussion, taking questions and comments from the several hundred gathered.
 

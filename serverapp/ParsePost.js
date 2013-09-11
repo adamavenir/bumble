@@ -11,7 +11,7 @@ var config  = require('../serverapp/useconfig').file('blogConfig.json');
 var wtchr   = require('wtchr');
 var marked  = require('marked');
 var _       = require('underscore');
-var yaml    = require('yaml');
+var yaml    = require('yamljs');
 
 var dir = config.postDir;
 var home = config.blogHome;
@@ -55,20 +55,42 @@ ParsePosts.prototype.parseFile = function (file, callback) {
     // # key: value
     function loadMetadata(file, filename) {
         var metadata = {};
-        var post;
+        var post = [];
         var markdown_h1_re = /^#\s+(\w+.*)/;
-        var front_matter_re = /^---([\s\S]*)---/;
-        var front_matter = file.match(front_matter_re);
-        if (front_matter) {
-            metadata = yaml.eval(front_matter[1].trim());
-            post = file.split(front_matter_re).pop().trim();
-        }
+        var front_matter = [];
+
+        var in_metadata = false;
+        var done = false;
+        var lines = file.split(/\n|\r\n/);
+        lines.forEach(function (line) {
+            if (done) {
+                post.push(line);
+            } else if (!in_metadata) {
+                if (line.match(/^---/)) {
+                    in_metadata = true;
+                } else {
+                    post.push(line);
+                }
+            } else if (in_metadata) {
+                if (!line.match(/^---/)) {
+                    front_matter.push(line);
+                } else {
+                    in_metadata = false;
+                    done = true;
+                }
+            }
+        });
+
+        front_matter = front_matter.join('\n');
+        post = post.join('\n');
+
+        metadata = yaml.parse(front_matter);
 
         return _.extend({}, metadata, {
             postBody: marked(post),
-            title: metadata.title || (markdown_h1_re.test(post.trim()) ? post.trim().match(markdown_h1_re)[1] : ""),
-            date: metadata.date ? Date.create(metadata.date) : postDate,
-            slug: metadata.slug || postSlug,
+            title: metadata.title,
+            date: Date.create(metadata.date),
+            slug: metadata.slug,
             blogTitle: config.blogTitle,
             blogSubTitle: config.blogSubTitle,
             author: metadata.author || config.blogAuthor,
