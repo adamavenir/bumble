@@ -4,6 +4,6 @@ head
   - if (locals.pageTitle)
     title!= locals.pageTitle + ' | ' + locals.blogTitle
   - else
-    title locals.blogTitle
+    title= locals.blogTitle
 block body
   body(id= locals.bodyId)

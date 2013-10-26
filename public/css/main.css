@@ -4338,6 +4338,11 @@ ul, ol {
   margin-left: 25%;
   float: left; }
 
+.pageTitle h1 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eeeeee;
+  text-align: center; }
+
 .postTitle {
   position: relative;
   padding-left: 0.9375em;
@@ -4362,7 +4367,16 @@ ul, ol {
 
 #pagination {
   padding: 10px 0;
-  border-top: 1px solid #eeeeee; }
+  border-top: 1px solid #eeeeee;
+  text-align: center; }
+
+article {
+  padding-bottom: 80px; }
+  article:last-of-type {
+    padding-bottom: 0; }
+
+article + .pages {
+  padding-top: 80px; }
 
 @media (max-width: 768px) {
   header {

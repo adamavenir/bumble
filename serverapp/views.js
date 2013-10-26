@@ -50,12 +50,46 @@ exports.tumblrRedirect = function(req, res) {
     logger.info('Request:  ' + req.url + '\n>>>>> Redirect: ' + slug);
 };
 
+exports.index = function (req, res) {
+    // logger.info(config.blogTitle);
+    paginator.paginate(postData, req, res, function (realPage) {
+        if (realPage) return res.redirect('/?page=' + realPage);
+        res.render('index', { 
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            bodyId: 'archive',
+            blogTitle: config.blogTitle,
+            blogSubtitle: config.blogSubtitle,
+            blogAuthor: config.blogAuthor,
+            gravatar: gravatar,
+            blogBio: config.blogBio
+        });
+
+        // res.render('post', {
+        //     pageTitle: thisPost.title,
+        //     blogTitle: config.blogTitle,
+        //     blogSubtitle: config.blogSubtitle,
+        //     blogAuthor: config.blogAuthor,
+        //     gravatar: gravatar,
+        //     blogBio: config.blogBio,
+        //     bodyId: 'post',
+        //     slug: slug,
+        //     title: thisPost.title,
+        //     date: thisPost.formattedDate,
+        //     author: thisPost.author,
+        //     content: thisPost.postBody,
+        //     type: thisPost.type
+        // });
+
+    });
+};
+
 exports.blogIndex = function (req, res) {
     // logger.info(config.blogTitle);
     paginator.paginate(postData, req, res, function (realPage) {
         if (realPage) return res.redirect('/?page=' + realPage);
         res.render('blogIndex', { 
-            pageTitle: 'All posts', 
+            pageTitle: 'Blog posts', 
             blogTitle: config.blogTitle,
             blogSubtitle: config.blogSubtitle,
             bodyId: 'archive',

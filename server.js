@@ -30,7 +30,8 @@ var home = config.blogHome;
 if (home == '/') { home == '' };
 
 // blog post indexes
-app.get(home, views.blogIndex);
+app.get(home, views.index);
+app.get(home + 'blog', views.blogIndex);
 app.get(home + ':year', views.blogYearIndex);
 app.get(home + ':year/:month', views.blogMonthIndex);
 app.get(home + ':year/:month/:day', views.blogDateIndex);
