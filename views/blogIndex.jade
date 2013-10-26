@@ -4,14 +4,16 @@ block body
   body(id= bodyId)
     include header
     .row
-      h1.large-9.large-offset-3.columns= pageTitle
-    .row
-      .large-9.large-offset-3.columns
+      .pageTitle
+        h1= pageTitle
     each post in postData
       .row
-        .large-3.columns
-          span.date=post.formattedDate
-        .large-9.columns
+        .pageContent
           p
             a(href= post.url)= post.title
+            br
+            span.postDate=post.formattedDate
+    .row
+          .paginationWrap           
+            include pagination
     include footer

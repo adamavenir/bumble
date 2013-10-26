@@ -12,5 +12,5 @@ blog/*
 pids
 logs
 results
-
+blog
 npm-debug.log

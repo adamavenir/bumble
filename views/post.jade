@@ -5,10 +5,10 @@ block body
     include header
     article(class=type)
       .row
-        a.permalink.large-3.columns(href="")= date       
-        .large-7.columns
+        a.permalink(href="")= date       
+        .postTitle
           h1(style="margin-top: 0;")= title         
         .large-2.hide-for-small.columns
       .row
-        .large-7.large-offset-3.columns!= content
+        .postContent!= content
     include footer

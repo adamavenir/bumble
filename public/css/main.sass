@@ -43,7 +43,11 @@ h3, h4, h5, h6
 //   margin-bottom: 0
 
 p
-  margin-bottom: .5em
+  margin-bottom: 1em
+  line-height: 130%
+
+  a
+    text-decoration: underline
 
 h2
   margin-top: 20px
@@ -59,6 +63,10 @@ h2
   text-align: right
   display: block
   margin-top: 3px
+
+.postDate
+  font-size: 12px
+  color: #aaa
 
 footer
   width: 100%
@@ -86,6 +94,24 @@ footer
 ul, ol
   padding-left: 50px
   padding-right: 50px
+
+
+.pageTitle, .pageContent, .paginationWrap
+  +grid-column($columns:6, $offset:3)
+
+.postTitle
+  +grid-column($columns:6)
+
+.permalink
+  +grid-column($columns:3)
+
+.postContent
+  +grid-column($columns:6, $offset:3)
+
+#pagination
+  padding: 10px 0
+  border-top: 1px solid #eee
+
 
 @media (max-width: 768px)
 
@@ -127,3 +153,16 @@ ul, ol
     .avatar
       width: 100%
       float: none
+
+
+  .pageTitle, .pageContent, .paginationWrap
+    +grid-column($columns:12, $offset:0)
+
+  .postTitle
+    +grid-column($columns:12)
+
+  .permalink
+    +grid-column($columns:12)
+
+  .postContent
+    +grid-column($columns:12, $offset:0)

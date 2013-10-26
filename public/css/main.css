@@ -4283,7 +4283,10 @@ h3, h4, h5, h6 {
   font-weight: normal; }
 
 p {
-  margin-bottom: 0.5em; }
+  margin-bottom: 1em;
+  line-height: 130%; }
+  p a {
+    text-decoration: underline; }
 
 h2 {
   margin-top: 20px; }
@@ -4299,6 +4302,10 @@ h2 {
   text-align: right;
   display: block;
   margin-top: 3px; }
+
+.postDate {
+  font-size: 12px;
+  color: #aaaaaa; }
 
 footer {
   width: 100%;
@@ -4322,6 +4329,40 @@ footer {
 ul, ol {
   padding-left: 50px;
   padding-right: 50px; }
+
+.pageTitle, .pageContent, .paginationWrap {
+  position: relative;
+  padding-left: 0.9375em;
+  padding-right: 0.9375em;
+  width: 50%;
+  margin-left: 25%;
+  float: left; }
+
+.postTitle {
+  position: relative;
+  padding-left: 0.9375em;
+  padding-right: 0.9375em;
+  width: 50%;
+  float: left; }
+
+.permalink {
+  position: relative;
+  padding-left: 0.9375em;
+  padding-right: 0.9375em;
+  width: 25%;
+  float: left; }
+
+.postContent {
+  position: relative;
+  padding-left: 0.9375em;
+  padding-right: 0.9375em;
+  width: 50%;
+  margin-left: 25%;
+  float: left; }
+
+#pagination {
+  padding: 10px 0;
+  border-top: 1px solid #eeeeee; }
 
 @media (max-width: 768px) {
   header {
@@ -4361,4 +4402,34 @@ ul, ol {
     margin-bottom: 20px; }
   footer .avatar {
     width: 100%;
-    float: none; } }
+    float: none; }
+
+  .pageTitle, .pageContent, .paginationWrap {
+    position: relative;
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+    width: 100%;
+    margin-left: 0%;
+    float: left; }
+
+  .postTitle {
+    position: relative;
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+    width: 100%;
+    float: left; }
+
+  .permalink {
+    position: relative;
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+    width: 100%;
+    float: left; }
+
+  .postContent {
+    position: relative;
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+    width: 100%;
+    margin-left: 0%;
+    float: left; } }

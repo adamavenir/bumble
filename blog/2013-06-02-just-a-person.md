@@ -3,7 +3,7 @@ date: 2013-06-02 22:04:39 GMT
 slug: just-a-person
 tumblr_post_url: http://adambrault.com/post/52004360603/just-a-person
 tags: 
-title: just a person
+title: Just a person
 type: text
 ---
 
