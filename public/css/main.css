@@ -4292,11 +4292,11 @@ h2 {
   margin-top: 20px; }
 
 .permalink {
-  font-size: 15px;
-  font-weight: 800;
+  font-size: 12px;
   display: block;
   margin-top: 10px;
-  text-align: right; }
+  text-align: right;
+  font-weight: 100; }
 
 .date {
   text-align: right;

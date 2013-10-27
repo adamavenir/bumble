@@ -7,7 +7,7 @@ var env      = require('getconfig'),
     gravatar = require('gravatar'),
     fs       = require('fs'),
     _        = require('underscore'),
-    config   = require('../serverapp/useconfig').file('blogConfig.json'),
+    config   = require('../blogConfig.json'),
     paginator = require('./paginator');
 
 var parsePosts  = new (require('./ParsePost'))(),
@@ -43,11 +43,10 @@ exports.index = function (req, res) {
 }; 
 
 exports.tumblrRedirect = function(req, res) {
-    var slug = req.params.tslug;
-    var thisPost = _.findWhere(postData, {fullSlug: slug });
-    res.redirect(301, thisPost.permalink);
-    logger.info(thisPost.permalink);
-    logger.info('Request:  ' + req.url + '\n>>>>> Redirect: ' + slug);
+    // logger.info('req.params.tslug: ' + req.params.tslug);
+    // logger.info('thisPost: ' + _.findWhere(postData, {slug: req.params.tslug }).url);
+    res.redirect(301, _.findWhere(postData, {slug: req.params.tslug }).url);
+    // logger.debug('Request:  ' + req.url + '\n>>>>> Redirect: ' + _.findWhere(postData, {slug: req.params.tslug }).url);
 };
 
 exports.index = function (req, res) {
@@ -64,23 +63,6 @@ exports.index = function (req, res) {
             gravatar: gravatar,
             blogBio: config.blogBio
         });
-
-        // res.render('post', {
-        //     pageTitle: thisPost.title,
-        //     blogTitle: config.blogTitle,
-        //     blogSubtitle: config.blogSubtitle,
-        //     blogAuthor: config.blogAuthor,
-        //     gravatar: gravatar,
-        //     blogBio: config.blogBio,
-        //     bodyId: 'post',
-        //     slug: slug,
-        //     title: thisPost.title,
-        //     date: thisPost.formattedDate,
-        //     author: thisPost.author,
-        //     content: thisPost.postBody,
-        //     type: thisPost.type
-        // });
-
     });
 };
 
@@ -151,7 +133,7 @@ exports.blogMonthIndex = function (req, res) {
         var postMonth = Date.create(postData[i].date).format('{MM}');
 
         if (postYear == year && postMonth == month) {
-            logger.info('dates match for ' + postData[i].title)
+            // logger.info('dates match for ' + postData[i].title)
             posts.push(postData[i]);
         }
         else

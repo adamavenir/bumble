@@ -2,7 +2,7 @@ var express     = require('express'),
     env         = require('getconfig'),
     logger      = require('bucker').createLogger(env.bucker, module),
     semiStatic  = require('semi-static'),
-    config      = require('./serverapp/useconfig').file('blogConfig.json'),
+    config      = require('./blogConfig.json'),
     _           = require('underscore');
 
 var views       = require('./serverapp/views');

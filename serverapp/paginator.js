@@ -1,4 +1,4 @@
-var config = require('./useconfig').file('blogConfig.json');
+var config = require('../blogConfig.json');
 
 exports.paginate = function (allPosts, req, res, callback) {
     var posts = [],
