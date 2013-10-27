@@ -60,6 +60,7 @@ exports.index = function (req, res) {
             blogTitle: config.blogTitle,
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
+            blogAuthorEmail: config.blogAuthorEmail,
             gravatar: gravatar,
             blogBio: config.blogBio,
             rssUrl: config.rssUrl
@@ -79,6 +80,7 @@ exports.blogIndex = function (req, res) {
             blogTitle: config.blogTitle,
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
+            blogAuthorEmail: config.blogAuthorEmail,
             gravatar: gravatar,
             blogBio: config.blogBio,
             rssUrl: config.rssUrl
@@ -119,6 +121,7 @@ exports.blogYearIndex = function (req, res) {
             blogTitle: config.blogTitle,
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
+            blogAuthorEmail: config.blogAuthorEmail,
             gravatar: gravatar,
             blogBio: config.blogBio,
             rssUrl: config.rssUrl
@@ -154,6 +157,7 @@ exports.blogMonthIndex = function (req, res) {
             blogTitle: config.blogTitle,
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
+            blogAuthorEmail: config.blogAuthorEmail,
             gravatar: gravatar,
             blogBio: config.blogBio,
             rssUrl: config.rssUrl 
@@ -187,6 +191,7 @@ exports.blogDateIndex = function (req, res) {
             blogTitle: config.blogTitle,
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
+            blogAuthorEmail: config.blogAuthorEmail,
             gravatar: gravatar,
             blogBio: config.blogBio,
             rssUrl: config.rssUrl
@@ -208,6 +213,7 @@ exports.blogPost = function (req, res) {
         blogTitle: config.blogTitle,
         blogSubtitle: config.blogSubtitle,
         blogAuthor: config.blogAuthor,
+        blogAuthorEmail: config.blogAuthorEmail,
         gravatar: gravatar,
         blogBio: config.blogBio,
         rssUrl: config.rssUrl,
