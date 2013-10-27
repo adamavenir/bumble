@@ -5,5 +5,9 @@ head
     title!= locals.pageTitle + ' | ' + locals.blogTitle
   - else
     title= locals.blogTitle
+  link(rel="alternate", type="applicaiton/rss+xml", href="http://adambrault.com/rss", title="Adam Brault")
+  meta(name="description", content= blogBio)
+  meta(charset="utf-8")
+
 block body
   body(id= locals.bodyId)
