@@ -1,6 +1,6 @@
 {
   "name": "bumble",
-  "version": "0.0.1-10",
+  "version": "0.0.1-12",
   "homepage": "https://github.com/adambrault/bumble",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
   "subdomain": "adambrault-bumble",
   "domains": [
     "adambrault.com"
-],
+  ],
   "scripts": {
     "start": "node server.js"
   },
