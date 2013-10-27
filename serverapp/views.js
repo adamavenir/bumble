@@ -61,7 +61,8 @@ exports.index = function (req, res) {
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
             gravatar: gravatar,
-            blogBio: config.blogBio
+            blogBio: config.blogBio,
+            rssUrl: config.rssUrl
         });
     });
 };
@@ -79,7 +80,8 @@ exports.blogIndex = function (req, res) {
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
             gravatar: gravatar,
-            blogBio: config.blogBio
+            blogBio: config.blogBio,
+            rssUrl: config.rssUrl
         });
     });
 };
@@ -118,7 +120,8 @@ exports.blogYearIndex = function (req, res) {
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
             gravatar: gravatar,
-            blogBio: config.blogBio
+            blogBio: config.blogBio,
+            rssUrl: config.rssUrl
         });
     });
 };
@@ -152,7 +155,8 @@ exports.blogMonthIndex = function (req, res) {
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
             gravatar: gravatar,
-            blogBio: config.blogBio    
+            blogBio: config.blogBio,
+            rssUrl: config.rssUrl 
         });
     });
 };
@@ -184,7 +188,8 @@ exports.blogDateIndex = function (req, res) {
             blogSubtitle: config.blogSubtitle,
             blogAuthor: config.blogAuthor,
             gravatar: gravatar,
-            blogBio: config.blogBio
+            blogBio: config.blogBio,
+            rssUrl: config.rssUrl
         });
     });
 };
@@ -205,6 +210,7 @@ exports.blogPost = function (req, res) {
         blogAuthor: config.blogAuthor,
         gravatar: gravatar,
         blogBio: config.blogBio,
+        rssUrl: config.rssUrl,
         bodyId: 'post',
         slug: slug,
         title: thisPost.title,
