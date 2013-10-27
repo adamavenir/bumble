@@ -22,6 +22,13 @@ var dateFormat = /(\d{4})\-((0|1)\d)\-((0|1|2|3)\d)-/;
 var posts = [];
 var postDate, postSlug, postDateText;
 
+
+marked.setOptions({
+  breaks: true,
+  smartypants: true,
+});
+
+
 function ParsePosts() {
     EventEmitter.call(this);
 }

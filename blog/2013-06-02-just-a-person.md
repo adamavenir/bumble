@@ -27,13 +27,13 @@ When I watched Chris's now iconic talk from JSConf EU, [An End to Negativity][0]
 
 Not only was Chris hugely supportive and encouraging when we put on our first conference, he also inspired so many others who have in turn had tremendous influence on me.
 
-Mikeal Rogers was particularly influential---if it hadn't been for his words to meat the closing party of Keeping it Realtime and in [his very kind wrap-up post][1], it's very likely RealtimeConf would have never happened. 
+Mikeal Rogers was particularly influential--if it hadn't been for his words to meat the closing party of Keeping it Realtime and in [his very kind wrap-up post][1], it's very likely RealtimeConf would have never happened. 
 
-And if it wasn't for having the chance of attending [Funconf][2] and getting to know Paul Campbell, it's possible some of the crazy ideas we had in mind for RealtimeConf might have been toned down---and it's certain that the most personally important conference I've been a part of ([Brio][3]) would never have existed. I wouldn't have had the conversations I did this past year with Paul, Jan, Allen, Boaz, or Ana---all of them about as deep as it gets, some of them months long!
+And if it wasn't for having the chance of attending [Funconf][2] and getting to know Paul Campbell, it's possible some of the crazy ideas we had in mind for RealtimeConf might have been toned down--and it's certain that the most personally important conference I've been a part of ([Brio][3]) would never have existed. I wouldn't have had the conversations I did this past year with Paul, Jan, Allen, Boaz, or Ana--all of them about as deep as it gets, some of them months long!
 
 It has been an amazing hallmark: if I have a conversation with someone and Chris comes up as a person people have huge respect for, the exploration for the root of that respect has almost always led to a new friendship.
 
-The closest friends I've made in the last couple of years and some of the most pivotal experiences have been made because of the reverberations of JSConf---and those people have profoundly shaped my thinking and, as a result, my actions.
+The closest friends I've made in the last couple of years and some of the most pivotal experiences have been made because of the reverberations of JSConf--and those people have profoundly shaped my thinking and, as a result, my actions.
 
 Of course, I say all this entirely from a very self-focused perspective. Undoubtedly the impact of JSConf is much, much more dramatic. 
 
@@ -45,7 +45,7 @@ JSConf is one couple running one event, but its ever-expanding impact cannot be 
 
 Sometimes I have a conversation with someone and I hear them describing their desire to change the world in some way, to make an impact, to make things better.
 
-There are a lot of people who seem to believe this starts with an ambitious, world-conquering dream---and while that might sometimes be the case, what I'm learning from the many people who've inspired me is _there is greater chance at making a real difference by focusing on the quality of each individual impact. Ambitious, shared values are, in fact, the only thing that are guaranteed to be scalable._
+There are a lot of people who seem to believe this starts with an ambitious, world-conquering dream--and while that might sometimes be the case, what I'm learning from the many people who've inspired me is _there is greater chance at making a real difference by focusing on the quality of each individual impact. Ambitious, shared values are, in fact, the only thing that are guaranteed to be scalable._
 
 If you want to make the world a better place, don't try to bite off the whole earth at once.
 
@@ -53,7 +53,7 @@ Start very small, stay focused on the small, and resist the temptation to increa
 
 I doubt anyone would call Chris Williams a man without ambition.
 
-But while he is a man with great dreams and awesome values, he is a man who knows he is just a man---and that his impact is not limited by what he can do, but by what other people are inspired and empowered to do because of his example.
+But while he is a man with great dreams and awesome values, he is a man who knows he is just a man--and that his impact is not limited by what he can do, but by what other people are inspired and empowered to do because of his example.
 
 Chris left room in the world for \*your\* impact: 
 
@@ -63,7 +63,7 @@ _**I put it to you."**_
 
 ----
 
-As an aside, I had some reflection on this topic in a talk I gave about [intentionally tiny leaders][4]. My thoughts keep developing on this---in fact, I found myself in discussion on this topic this week.
+As an aside, I had some reflection on this topic in a talk I gave about [intentionally tiny leaders][4]. My thoughts keep developing on this--in fact, I found myself in discussion on this topic this week.
 
 [0]: http://jsconf.eu/2011/an_end_to_negativity.html
 [1]: http://www.futurealoof.com/posts/what-is-the-maximum-number-of-courses.html
