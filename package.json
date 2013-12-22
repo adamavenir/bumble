@@ -2,33 +2,18 @@
   "name": "bumble",
   "version": "0.0.2",
   "main": "lib/bumble",  
-  "homepage": "https://github.com/adambrault/bumble",
   "repository": {
     "type": "git",
     "url": "git@github.com:adambrault/bumble.git"
   },
   "description": "A very simple blog",
   "dependencies": {
-    "marked": "~0.2.8",
-    "async": "~0.2.8",
-    "underscore": "~1.4.4",
-    "getconfig": "0.0.5",
-    "walk": "~2.2.1",
     "express": "~3.2.4",
     "connect": "~2.7.9",
-    "jade": "~0.30.0",
-    "jsonfile": "0.0.1",
-    "sugar": "~1.3.8",
-    "watch": "~0.7.0",
-    "bucker": "~0.4.0",
-    "gravatar": "~1.0.6",
-    "wtchr": "0.0.1",
-    "yamljs": "~0.1.4"
   },
-
   "keywords": [
     "blog",
-    "markdown",
+    "markdown"
   ],
   "author": {
     "name": "Adam Brault",
@@ -37,5 +22,6 @@
   "license": "MIT",
   "engines": {
     "node": "0.10.x"
-  }
+  },
+  "homepage": "https://github.com/adambrault/bumble"
 }
