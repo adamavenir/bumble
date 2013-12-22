@@ -1,25 +1,22 @@
 {
   "name": "bumble",
-  "version": "0.0.1-15",
+  "version": "0.0.2",
+  "main": "lib/bumble",  
   "homepage": "https://github.com/adambrault/bumble",
   "repository": {
     "type": "git",
     "url": "git@github.com:adambrault/bumble.git"
   },
-  "description": "A very simple personal website and blog",
+  "description": "A very simple blog",
   "dependencies": {
-    "semi-static": "0.0.4",
     "marked": "~0.2.8",
     "async": "~0.2.8",
-    "stitch": "~0.3.3",
     "underscore": "~1.4.4",
     "getconfig": "0.0.5",
     "walk": "~2.2.1",
     "express": "~3.2.4",
     "connect": "~2.7.9",
-    "express-stitch": "0.0.2",
     "jade": "~0.30.0",
-    "foundation": "~4.1.6-1",
     "jsonfile": "0.0.1",
     "sugar": "~1.3.8",
     "watch": "~0.7.0",
@@ -28,14 +25,16 @@
     "wtchr": "0.0.1",
     "yamljs": "~0.1.4"
   },
-  "main": "server.js",
-  "subdomain": "adambrault-bumble",
-  "domains": [
-    "adambrault.com"
+
+  "keywords": [
+    "blog",
+    "markdown",
   ],
-  "scripts": {
-    "start": "node server.js"
+  "author": {
+    "name": "Adam Brault",
+    "url": "http://adambrault.com"
   },
+  "license": "MIT",
   "engines": {
     "node": "0.10.x"
   }

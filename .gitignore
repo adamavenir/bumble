@@ -1,17 +1,3 @@
 .DS_Store
 node_modules
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-blog/*
-pids
-logs
-results
-blog
 npm-debug.log
-production_
