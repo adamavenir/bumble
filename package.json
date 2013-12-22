@@ -1,6 +1,6 @@
 {
   "name": "bumble",
-  "version": "0.0.2",
+  "version": "0.0.2-4",
   "main": "lib/bumble",  
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "description": "A very simple blog",
   "dependencies": {
     "express": "~3.2.4",
-    "connect": "~2.7.9",
+    "connect": "~2.7.9"
   },
   "keywords": [
     "blog",
