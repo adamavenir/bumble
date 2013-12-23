@@ -2,8 +2,9 @@ var express     = require('express'),
     env         = require('getconfig'),
     logger      = require('bucker').createLogger(env.bucker, module),
     semiStatic  = require('semi-static'),
-    config      = require('./blogConfig.json'),
     _           = require('underscore');
+
+config      = require('./blogConfig.json'),
 
 var views       = require('./serverapp/views');
 
@@ -19,8 +20,8 @@ app.configure(function () {
 
 // use jade
 app.set('view engine', 'jade');
-// 301 redirects for old tumblr blog posts
 
+// 301 redirects for old tumblr blog posts
 app.get('/post/:tid/:tslug', views.tumblrRedirect);
 
 // rss
@@ -39,14 +40,8 @@ app.get(home + ':year/:month/:day', views.blogDateIndex);
 // blog posts
 app.get(home + ':year/:month/:day/:pslug', views.blogPost);
 
-// TODO
-// quotes, talks, links, tools, apps, music, micro
-
 // home
 app.get('/', views.index);
-
-// semi-static views
-app.get('/*', semiStatic());
 
 // 404
 app.get('*', views.notFound);

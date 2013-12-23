@@ -1,6 +1,6 @@
 {
   "name": "bumble",
-  "version": "0.0.2-5",
+  "version": "0.0.2-6",
   "main": "lib/bumble",  
   "repository": {
     "type": "git",
