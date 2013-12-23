@@ -1,15 +1,22 @@
 {
   "name": "bumble",
-  "version": "0.0.2-7",
-  "main": "lib/bumble",  
+  "version": "0.0.2-8",
+  "main": "lib/bumble",
   "repository": {
     "type": "git",
     "url": "git@github.com:adambrault/bumble.git"
   },
   "description": "A very simple blog",
   "dependencies": {
-    "express": "~3.2.4",
-    "connect": "~2.7.9"
+    "jsonfile": "~1.1.1",
+    "gravatar": "~1.0.6",
+    "underscore": "~1.5.2",
+    "marked": "~0.2.10",
+    "sugar": "~1.4.1",
+    "walk": "~2.2.1",
+    "wtchr": "0.0.1",
+    "yamljs": "~0.1.4",
+    "bucker": "~0.8.0"
   },
   "keywords": [
     "blog",
