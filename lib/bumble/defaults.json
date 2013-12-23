@@ -1,0 +1,12 @@
+{
+  "blogTitle": "Blog",
+  "blogSubtitle": "Blog subtitle",
+  "blogAuthor": "Blog author",
+  "blogAuthorEmail": "you@reaweso.me",
+  "blogBio": "Guess what. I'm a blog.",
+  "siteUrl": "http://example.com",
+  "rssUrl": "http://example.com/rss",
+  "postDir": "posts",
+  "blogHome": "/",
+  "maxPosts": 10
+}
