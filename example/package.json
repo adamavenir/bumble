@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "version": "0.0.1",
+  "main": "blog.js",
+  "description": "demo bumble blog",
+  "dependencies": {
+    "express": "~3.2.6",
+    "connect": "~2.7.9",
+    "bumble": "0.0.2-6",
+    "bucker": "~0.8.0",
+    "jsonfile": "~1.1.1",
+    "gravatar": "~1.0.6",
+    "underscore": "~1.5.2",
+    "marked": "~0.2.10",
+    "sugar": "~1.4.1",
+    "walk": "~2.2.1",
+    "wtchr": "0.0.1",
+    "yamljs": "~0.1.4",
+    "jade": "~1.0.0"
+  },
+  "author": {
+    "name": "Adam Brault",
+    "url": "http://adambrault.com"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "0.10.x"
+  }
+}
