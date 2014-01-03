@@ -1,7 +1,7 @@
 var express     = require('express');
 var logger      = require('bucker').createLogger();
 var Bumble      = require('bumble');
-
+var util        = require('util');
 var config      = require('./bumbleConfig.json');
 
 var app = express();
@@ -14,8 +14,8 @@ app.configure(function () {
     app.use(logger.middleware());
 });
 
-var bumble = Bumble(app, config);
+var bumble = new Bumble(app, config);
 
 app.listen(2000);
 
-logger.info('bumble running on port 2000');
+logger.info('bumble running on the year 2000');
