@@ -5,7 +5,7 @@
   "description": "demo bumble blog",
   "dependencies": {
     "express": "~3.2.6",
-    "bumble": "0.0.2-8",
+    "bumble": "",
     "jade": "~1.0.0",
     "bucker": "~0.8.0"
   },
@@ -16,5 +16,9 @@
   "license": "MIT",
   "engines": {
     "node": "0.10.x"
+  },
+  "scripts": {
+    "postinstall": "npm link ../../bumble",
+    "postupdate": "npm link ../../bumble"
   }
 }
