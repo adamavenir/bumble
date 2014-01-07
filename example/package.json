@@ -5,7 +5,7 @@
   "description": "demo bumble blog",
   "dependencies": {
     "express": "~3.2.6",
-    "bumble": "",
+    "bumble": "0.0.2-8",
     "jade": "~1.0.0",
     "bucker": "~0.8.0"
   },
