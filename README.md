@@ -21,7 +21,7 @@ var express = require('express');
 var Bumble  = require('bumble');
 var config  = require('./bumbleConfig.json');
 
-var app    = express();
+var app = express();
 
 var bumble = new Bumble(app, config);
 
