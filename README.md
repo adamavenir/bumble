@@ -4,10 +4,7 @@ bumble
 ======
 A very simple markdown blog module
 
-Bumble can:
-
-- Serve Markdown data from ``posts`` directory 
-- Read yaml metadata
+- Serve markdown + yaml text files from configurable directory 
 - Provide date-based archives
 - Adds Gravatar based on Author email
 - Read Tumblr URLs and ``301 Redirect``
