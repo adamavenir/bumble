@@ -23,7 +23,7 @@ var bumble = new Bumble(app, config);
 
 app.listen(3000);
 
-logger.info('bumble running on the year 3000');
+console.log('bumble running on the year 3000');
 
 ```
 
