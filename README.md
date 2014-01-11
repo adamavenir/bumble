@@ -4,7 +4,7 @@ bumble
 ======
 A very simple markdown blog module
 
-## bumble can!
+Bumble can:
 
 - Serve Markdown data from ``posts`` directory 
 - Read yaml metadata
