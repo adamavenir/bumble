@@ -13,6 +13,10 @@ A very simple markdown blog module
 ## Add the module to your app
 
 ```
+npm install bumble
+```
+
+```
 var express = require('express');
 var Bumble  = require('bumble');
 var config  = require('./bumbleConfig.json');
