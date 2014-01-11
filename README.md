@@ -9,10 +9,9 @@ A very simple markdown blog module
 - Serve Markdown data from ``posts`` directory 
 - Read yaml metadata
 - Provide date-based archives
-– Serve a configurable number of posts on the home page and RSS
-- Comes with simple, default styles.
 - Adds Gravatar based on Author email
 - Read Tumblr URLs and ``301 Redirect``
+- Comes with simple, default styles.
 
 ## Add the module to your app
 
