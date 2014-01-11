@@ -9,9 +9,8 @@ A very simple markdown blog module
 - Serve Markdown data from ``posts`` directory 
 - Read yaml metadata
 - Provide date-based archives
-– Serve RSS
 – Serve a configurable number of posts on the home page and RSS
-- Comes with simple, default styles, built on Foundation.
+- Comes with simple, default styles.
 - Adds Gravatar based on Author email
 - Read Tumblr URLs and ``301 Redirect``
 
