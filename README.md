@@ -43,7 +43,7 @@ Check out the [example](https://github.com/adambrault/bumble/tree/master/example
   "blogBio": "One day, I decided to write a blog. This is the story of that blog.",
   "siteUrl": "http://example.com",
   "rssUrl": "http://example.com/feed/rss",
-  "postDir": "blog",
+  "postDir": "posts",
   "blogHome": "/",
   "maxPosts": "10"
 }
