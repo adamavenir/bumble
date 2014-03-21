@@ -1,2 +1,4 @@
 node_modules
 example
+example_express/node_modules
+example_hapi/node_modules

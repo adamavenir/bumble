@@ -7,5 +7,6 @@
     "white": true,
     "undef": true,
     "trailing": true,
+    "unused": true,
     "node": true
 }

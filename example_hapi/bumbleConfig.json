@@ -1,0 +1,12 @@
+{
+  "blogTitle": "Adam Brault",
+  "blogSubtitle": "Hey, I just write here.",
+  "blogAuthor": "Adam Brault",
+  "blogAuthorEmail": "adam@brault.io",
+  "blogBio": "Hi, I'm Adam. I founded &yet where I work with people I love. The joys of my life are Kristi, Katie, and Ephraim.",
+  "siteUrl": "http://adambrault.com",
+  "rssUrl": "http://adambrault.com/rss",
+  "postDir": "posts",
+  "blogHome": "/",
+  "maxPosts": 10
+}

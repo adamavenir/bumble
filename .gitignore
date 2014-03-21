@@ -1,4 +1,5 @@
 .DS_Store
 node_modules
 npm-debug.log
-example/blog
+example_express/node_modules
+example_hapi/node_modules

@@ -1,16 +1,16 @@
 var express     = require('express');
-var Bumble      = require('bumble');
+var bumble      = require('bumble');
 var config      = require('./bumbleConfig.json');
 
 var app = express();
 
 app.configure(function () {
     app.use(express.compress());
-    app.use(express['static'](__dirname + '/public'));
+    app.use(express.static(__dirname + '/public'));
     app.use(express.bodyParser());
 });
 
-var bumble = new Bumble(app, config);
+bumble.express(app, config);
 
 app.listen(3000);
 
