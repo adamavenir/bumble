@@ -3,7 +3,7 @@ var config = require('./bumbleConfig.json');
 
 var server = new Hapi.Server('localhost', 3000);
 
-server.pack.require({ '.': config }, function (err) {
+server.pack.require({ 'bumble': config }, function (err) {
     if (err) throw err;
 
     server.start(function () {
