@@ -4,7 +4,7 @@ var Lab = require('lab');
 var Hapi = require('hapi');
 var blogConfig = require('./testConfig.json');
 
-Lab.experiment('default happy path tests', function () {
+Lab.experiment('default tests', function () {
     Lab.before(function (done) {
         server = new Hapi.Server('localhost', 3001, { views: { engines: { jade: 'jade' }, path: './example/views' } });
         server.pack.require({'..': blogConfig}, function _packRequired(err) {
@@ -15,13 +15,22 @@ Lab.experiment('default happy path tests', function () {
             done();
         });
     });
-    Lab.test('tumblr redirect', function (done) {
+    Lab.test('successful tumblr redirect', function (done) {
         server.inject({
             method: 'get',
             url: '/post/xj9000/another-post-goes-here'
         }, function _getPost(res) {
             Lab.expect(res.statusCode, 'response code').to.equal(301);
             Lab.expect(res.headers.location, 'redirect location').to.equal('http://localhost:3001/2011/06/04/another-post-goes-here');
+            done();
+        });
+    });
+    Lab.test('missing tumblr redirect', function (done) {
+        server.inject({
+            method: 'get',
+            url: '/post/xj9000/another-post-was-here'
+        }, function _getPost(res) {
+            Lab.expect(res.statusCode, 'response code').to.equal(404);
             done();
         });
     });
@@ -35,4 +44,14 @@ Lab.experiment('default happy path tests', function () {
             done();
         });
     });
+    //Lab.test('rss page', function (done) {
+        //server.inject({
+            //method: 'get',
+            //url: '/rss',
+        //}, function _getRss(res) {
+            //Lab.expect(res.statusCode, 'response code').to.equal(200);
+            //Lab.expect(res.contentType, 'response content type').to.equal('test/xml');
+            //done();
+        //});
+    //});
 });
