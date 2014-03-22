@@ -25,4 +25,14 @@ Lab.experiment('default happy path tests', function () {
             done();
         });
     });
+    Lab.test('404 page', function (done) {
+        server.inject({
+            method: 'get',
+            url: '/1999/12/31/prince-party'
+        }, function _getInvalidPost(res) {
+            Lab.expect(res.statusCode, 'response code').to.equal(404);
+            Lab.expect(res.payload, 'response body').to.equal('<h1>404</h1>');
+            done();
+        });
+    });
 });
