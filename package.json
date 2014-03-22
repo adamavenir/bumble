@@ -19,6 +19,8 @@
     "yamljs": "~0.1.4"
   },
   "devDependencies": {
+    "hapi": "^3.0.1",
+    "lab": "^1.9.0",
     "precommit-hook": "^0.3.10"
   },
   "engines": {
@@ -29,6 +31,9 @@
     "blog",
     "markdown"
   ],
+  "scripts": {
+    "test": "make test"
+  },
   "license": "MIT",
   "main": "lib/bumble",
   "repository": {
