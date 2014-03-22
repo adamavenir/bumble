@@ -6,7 +6,7 @@ var blogConfig = require('./testConfig.json');
 
 Lab.experiment('default happy path tests', function () {
     Lab.before(function (done) {
-        server = new Hapi.Server('localhost', 3001);
+        server = new Hapi.Server('localhost', 3001, { views: { engines: { jade: 'jade' }, path: './example/views' } });
         server.pack.require({'..': blogConfig}, function _packRequired(err) {
             if (err) {
                 process.stderr.write('Unable to setUp tests', err, '\n');
