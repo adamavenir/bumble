@@ -6,7 +6,7 @@
   "blogBio": "This is a test blog used for the bumble test suite",
   "siteUrl": "http://localhost:3001",
   "rssUrl": "http://localhost:3001/rss",
-  "postDir": "../../../test/posts",
+  "postDir": "../../../example/posts",
   "blogHome": "/",
   "maxPosts": 3
 }

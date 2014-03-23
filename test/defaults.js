@@ -44,14 +44,16 @@ Lab.experiment('default tests', function () {
             done();
         });
     });
-    //Lab.test('rss page', function (done) {
-        //server.inject({
-            //method: 'get',
-            //url: '/rss',
-        //}, function _getRss(res) {
-            //Lab.expect(res.statusCode, 'response code').to.equal(200);
-            //Lab.expect(res.contentType, 'response content type').to.equal('test/xml');
-            //done();
-        //});
-    //});
+    Lab.test('rss page', function (done) {
+        server.inject({
+            method: 'get',
+            url: '/rss',
+        }, function _getRss(res) {
+            Lab.expect(res.statusCode, 'response code').to.equal(200);
+            //There is probably a better way to test content type
+            Lab.expect(res.headers['content-type'], 'response content type').to.equal('text/xml; charset=utf-8');
+            //TODO parse rss
+            done();
+        });
+    });
 });

@@ -4,7 +4,7 @@
   "main": "blog.js",
   "description": "demo bumble blog using hapi",
   "dependencies": {
-    "hapi": "~3.0.0",
+    "hapi": "^3.0.0",
     "bumble": "0.1.0-2",
     "jade": "~1.0.0",
     "bucker": "~0.8.0"
