@@ -1,5 +1,5 @@
 ---
-date: 2013-06-02 22:04:39 GMT
+date: 2011-06-04 22:04:39 GMT
 slug: another-post-goes-here
 tags: sample
 title: Another post goes here

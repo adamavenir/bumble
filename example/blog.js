@@ -1,17 +1,41 @@
-var express     = require('express');
-var Bumble      = require('bumble');
-var config      = require('./bumbleConfig.json');
+var Hapi = require('hapi');
+var config = require('./bumbleConfig.json');
 
-var app = express();
+var server = new Hapi.Server('localhost', 3000);
 
-app.configure(function () {
-    app.use(express.compress());
-    app.use(express['static'](__dirname + '/public'));
-    app.use(express.bodyParser());
+server.views({
+    engines: {
+        jade: 'jade'
+    },
+    path: 'views',
 });
 
-var bumble = new Bumble(app, config);
+server.route({
+    method: 'get',
+    path: '/css/{path*}',
+    handler: {
+        directory: {
+            path: 'public/css'
+        }
+    }
 
-app.listen(3000);
+});
 
-console.log('bumble running on the year 3000');
+server.route({
+    method: 'get',
+    path: '/js/{path*}',
+    handler: {
+        directory: {
+            path: 'public/js'
+        }
+    }
+});
+
+server.pack.require({ 'bumble': config }, function (err) {
+    if (err) throw err;
+
+    server.start(function () {
+        console.log('bumble running on the year 3000');
+    });
+});
+

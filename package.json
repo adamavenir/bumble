@@ -1,34 +1,44 @@
 {
   "name": "bumble",
+  "description": "A very simple blog",
   "version": "0.1.1",
+  "author": {
+    "name": "Adam Brault",
+    "url": "http://adambrault.com"
+  },
+  "bugs": "https://github.com/adambrault/bumble/issues",
+  "dependencies": {
+    "bucker": "^1.0.9",
+    "gravatar": "~1.0.6",
+    "js-yaml": "^3.0.2",
+    "jsonfile": "~1.1.1",
+    "marked": "~0.3.0",
+    "sugar": "~1.4.1",
+    "underscore": "~1.5.2",
+    "walk": "~2.2.1",
+    "wtchr": "0.0.1"
+  },
+  "devDependencies": {
+    "hapi": "^3.0.0",
+    "lab": "^1.9.0",
+    "precommit-hook": "^0.3.10",
+    "jade": "~1.0.0"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "homepage": "https://github.com/adambrault/bumble",
+  "keywords": [
+    "blog",
+    "markdown"
+  ],
+  "license": "MIT",
   "main": "lib/bumble",
   "repository": {
     "type": "git",
     "url": "git@github.com:adambrault/bumble.git"
   },
-  "description": "A very simple blog",
-  "dependencies": {
-    "bucker": "~0.8.0",
-    "marked": "~0.3.0",
-    "sugar": "~1.4.1",
-    "jsonfile": "~1.1.1",
-    "gravatar": "~1.0.6",
-    "underscore": "~1.5.2",
-    "walk": "~2.2.1",
-    "wtchr": "0.0.1",
-    "yamljs": "~0.1.4"
-  },
-  "keywords": [
-    "blog",
-    "markdown"
-  ],
-  "author": {
-    "name": "Adam Brault",
-    "url": "http://adambrault.com"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": "0.10.x"
-  },
-  "homepage": "https://github.com/adambrault/bumble"
+  "scripts": {
+    "test": "make test"
+  }
 }
