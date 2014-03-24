@@ -8,7 +8,8 @@ A very simple markdown blog module
 - Provide date-based archives
 - Adds Gravatar based on Author email
 - Read Tumblr URLs and ``301 Redirect``
-- Comes with simple, default styles.
+- Comes with simple, default templates and styles (in the ``example`` folder).
+- Uses [hapi](http://hapijs.org)
 
 ## Add the module to your app
 
@@ -17,17 +18,37 @@ npm install bumble
 ```
 
 ```
-var express = require('express');
-var Bumble  = require('bumble');
-var config  = require('./bumbleConfig.json');
+var Hapi = require('hapi');
+var config = require('./bumbleConfig.json');
 
-var app = express();
+var server = new Hapi.Server('localhost', 3000);
 
-var bumble = new Bumble(app, config);
+server.views({
+    engines: { jade: 'jade' },
+    path: 'views',
+});
 
-app.listen(3000);
+server.route({
+    method: 'get',
+    path: '/css/{path*}',
+    handler: { directory: { path: 'public/css' } }
+});
 
-console.log('bumble running on the year 3000');
+server.route({
+    method: 'get',
+    path: '/js/{path*}',
+    handler: { directory: { path: 'public/js' } }
+});
+
+server.pack.require({ 'bumble': config }, function (err) {
+    if (err) throw err;
+
+    server.start(function () {
+        console.log('bumble running on the year 3000');
+    });
+});
+
+
 
 ```
 
@@ -61,11 +82,9 @@ Put a markdown file in the ``blog`` directory (or whichever you've chosen in ``p
 YYYY-MM-DD-this-is-the-name-of-the-post.md
 ```
 
-URL slug will be set by the filename. Title will be taken from the first line, if it contains metadata or will fall back to "untitled" in the index.
-
 ## Adding metadata:
 
-Just include a simple section of yaml at the header of each post, fenced in with three dashes and using these keys:
+Just include a simple section of YAML at the header of each post, fenced in with three dashes and using these keys:
 ```
 ---
 date: 2013-06-02 22:04:39 GMT
@@ -86,6 +105,7 @@ If you're using bumble, submit a pull request and add yourself to this list. :)
 
 ## Contributors
 - [Adam Brault](http://twitter.com/adambrault)
-- [Nathan LaFreniere](http://twitter.com/quitlahok)
+- [Gar](http://twitter.com/wraithgar)
+- [NLF](http://twitter.com/quitlahok)
 - [Aaron McCall](http://twitter.com/aaronmccall)
 - [Julien Genestoux](http://twitter.com/julien51)
