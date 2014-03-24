@@ -1,5 +1,5 @@
 ---
-date: 2013-06-02 22:04:39 GMT
+date: 2013-06-03 22:04:39 GMT
 slug: sample-post
 tags: sample
 title: Some sample post
