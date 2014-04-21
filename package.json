@@ -12,6 +12,7 @@
     "js-yaml": "^3.0.2",
     "jsonfile": "~1.1.1",
     "marked": "~0.3.0",
+    "slugger": "^0.1.0",
     "sugar": "~1.4.1",
     "underscore": "~1.5.2",
     "walk": "~2.2.1",
@@ -20,9 +21,9 @@
   "devDependencies": {
     "bucker": "^1.0.9",
     "hapi": "^3.0.0",
+    "jade": "~1.0.0",
     "lab": "^1.9.0",
-    "precommit-hook": "^0.3.10",
-    "jade": "~1.0.0"
+    "precommit-hook": "^0.3.10"
   },
   "engines": {
     "node": "0.10.x"
