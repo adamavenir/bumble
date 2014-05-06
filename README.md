@@ -68,7 +68,8 @@ Check out the [full example](https://github.com/adambrault/bumble/tree/master/ex
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "posts",
   "blogHome": "/",
-  "maxPosts": "10"
+  "maxPosts": "10",
+  "browserCache": 3600000
 }
 ```
 
@@ -89,7 +90,7 @@ Just include a simple section of YAML at the header of each post, fenced in with
 ---
 date: 2013-06-02 22:04:39 GMT
 slug: well-yep-another-post
-tags: sample
+tags: sample, example
 title: Well, yep, another post!
 ---
 ```
@@ -99,6 +100,7 @@ title: Well, yep, another post!
 - [&yet](http://blog.andyet.com)
 - [^Lift Security](https://blog.liftsecurity.io/)
 - [Fritzy](http://gists.fritzy.io/)
+- [The Danger Computer](http://danger.computer)
 
 If you're using bumble, submit a pull request and add yourself to this list. :)
 
