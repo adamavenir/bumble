@@ -9,6 +9,7 @@
   "bugs": "https://github.com/adambrault/bumble/issues",
   "dependencies": {
     "gravatar": "~1.0.6",
+    "highlight.js": "^8.0.0",
     "js-yaml": "^3.0.2",
     "jsonfile": "~1.1.1",
     "marked": "~0.3.0",
@@ -16,8 +17,7 @@
     "sugar": "~1.4.1",
     "underscore": "~1.5.2",
     "walk": "~2.2.1",
-    "wtchr": "0.0.1",
-    "highlight.js": "^8.0.0"
+    "wtchr": "0.0.1"
   },
   "devDependencies": {
     "bucker": "^1.0.9",
