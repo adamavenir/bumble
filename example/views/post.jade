@@ -1,14 +1,14 @@
 extends layout
 
 block body
-  body(id= bodyId)
+  body(id= locals.bodyId)
     include header
     article(class=type)
       .row
-        a.permalink(href="")= date       
+        a.permalink(href="")= locals.postData.formattedDate       
         .postTitle
-          h1(style="margin-top: 0;")= pageTitle         
+          h1(style="margin-top: 0;")= locals.postData.title         
         .large-2.hide-for-small.columns
       .row
-        .postContent!= content
+        .postContent!= locals.postData.postBody
     include footer

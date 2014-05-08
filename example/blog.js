@@ -7,31 +7,11 @@ server.views({
     engines: {
         jade: 'jade'
     },
+    isCached: false,
     path: 'views',
 });
 
-server.route({
-    method: 'get',
-    path: '/css/{path*}',
-    handler: {
-        directory: {
-            path: 'public/css'
-        }
-    }
-
-});
-
-server.route({
-    method: 'get',
-    path: '/js/{path*}',
-    handler: {
-        directory: {
-            path: 'public/js'
-        }
-    }
-});
-
-server.pack.require({ 'bumble': config }, function (err) {
+server.pack.require({ bumble: config, good: {}, electricfence: {path: 'public', url: '/'} }, function (err) {
     if (err) throw err;
 
     server.start(function () {

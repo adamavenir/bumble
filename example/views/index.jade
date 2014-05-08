@@ -1,9 +1,9 @@
 extends layout
 
 block body
-  body(id= bodyId)
+  body(id= locals.bodyId)
     include header
-    each post in postData
+    each post in locals.postData
       article(class=post.type)
         .row
           a.permalink(href= post.url)= post.formattedDate       

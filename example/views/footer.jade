@@ -1,11 +1,11 @@
 footer
   .row
     .large-3.small-3.columns
-      img.avatar(src=gravatar)
+      img.avatar(src=locals.blogAuthorGravatar)
     .large-5.small-9.columns
       .about
-        h2 About #{blogAuthor}
-        p= blogBio
+        h2 About #{locals.blogAuthor}
+        p= locals.blogBio
     .large-3.small-9.columns
       .archives
         h2 Blog archives
