@@ -5,7 +5,7 @@ head
     title!= locals.pageTitle + ' | ' + locals.blogTitle
   - else
     title= locals.blogTitle
-  link(rel="alternate", type="application/rss+xml", href= rssUrl, title= blogTitle)
+  link(rel="alternate", type="application/rss+xml", href= locals.rssUrl, title= locals.blogTitle)
   meta(name="description", content= blogBio)
   meta(charset="utf-8")
   meta(name="viewport", content="width=device-width,initial-scale=1.0")

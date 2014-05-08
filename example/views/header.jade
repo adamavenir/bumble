@@ -4,5 +4,5 @@ header.row
       h1.blogTitle= locals.blogTitle
     p.blogSubTitle= locals.blogSubtitle
   nav.main
-    a.emailToMe(href="mailto:" + blogAuthorEmail) Email
+    a.emailToMe(href="mailto:" + locals.blogAuthorEmail) Email
     input.subToMe(type="button", onclick="(function(){var z=document.createElement('script');z.src='https://www.subtome.com/load.js';document.body.appendChild(z);})()", value="Subscribe")
