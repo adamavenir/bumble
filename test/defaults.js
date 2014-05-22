@@ -40,7 +40,7 @@ Lab.experiment('default tests', function () {
             url: '/1999/12/31/prince-party'
         }, function _getInvalidPost(res) {
             Lab.expect(res.statusCode, 'response code').to.equal(404);
-            Lab.expect(res.payload, 'response body').to.equal('<h1>404</h1>');
+            Lab.expect(res.payload, 'response body').to.equal('<!DOCTYPE html><head><body id=\"fourohfour\"><h1>404</h1></body></head>');
             done();
         });
     });
