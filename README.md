@@ -44,7 +44,7 @@ server.pack.require({ 'bumble': config }, function (err) {
     if (err) throw err;
 
     server.start(function () {
-        console.log('bumble running on the port' + server.info.port);
+        console.log('bumble running on the port ' + server.info.port);
     });
 });
 
