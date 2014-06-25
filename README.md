@@ -106,8 +106,9 @@ If you're using bumble, submit a pull request and add yourself to this list. :)
 
 
 ## Contributors
-- [Adam Brault](http://twitter.com/adambrault)
-- [Gar](http://twitter.com/wraithgar)
-- [NLF](http://twitter.com/quitlahok)
-- [Aaron McCall](http://twitter.com/aaronmccall)
-- [Julien Genestoux](http://twitter.com/julien51)
+- [Adam Brault](//twitter.com/adambrault)
+- [Gar](//twitter.com/wraithgar)
+- [NLF](//twitter.com/quitlahok)
+- [Aaron McCall](//twitter.com/aaronmccall)
+- [Julien Genestoux](//twitter.com/julien51)
+- [Adam Baldwin](//twitter.com/adam_baldwin)
