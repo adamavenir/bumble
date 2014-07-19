@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "bucker": "^1.0.9",
-    "hapi": "^3.0.0",
+    "hapi": "^6.0.0",
     "jade": "~1.0.0",
-    "lab": "^1.9.0",
+    "lab": "^3.2.1",
     "precommit-hook": "^0.3.10"
   },
   "engines": {

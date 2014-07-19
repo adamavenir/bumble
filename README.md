@@ -70,12 +70,15 @@ Check out the [full example](https://github.com/adambrault/bumble/tree/master/ex
   "blogHome": "/",
   "maxPosts": "10",
   "browserCache": 3600000
+  "labels": ["blog", "http"]
 }
 ```
 
 ``maxPosts`` will set the maximum number of posts available on the main page and RSS feed.
 
 ``blogHome`` will accept routes like ``/`` or ``/blog`` or ``/somethingelse``.
+
+``labels`` can be a string or an array, or not provided at all.  Please see <a href='http://hapijs.com/api/v6.2.0#pluginselectlabels'>Hapi API docs</a> for more info on labels
 
 Put a markdown file in the ``blog`` directory (or whichever you've chosen in ``postDir``) in this format:
 
