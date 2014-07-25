@@ -1,5 +1,5 @@
 test-cov:
-		@node node_modules/lab/bin/lab -r threshold -t 100
+		@node node_modules/lab/bin/lab -c
 test:
 		@node node_modules/lab/bin/lab
 test-cov-html:

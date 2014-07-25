@@ -1,7 +1,7 @@
 {
   "name": "bumble",
   "description": "A very simple blog",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "author": {
     "name": "Adam Brault",
     "url": "http://adambrault.com"
@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "bucker": "^1.0.9",
-    "hapi": "^3.0.0",
+    "hapi": "^6.0.0",
     "jade": "~1.0.0",
-    "lab": "^1.9.0",
+    "lab": "^3.2.1",
     "precommit-hook": "^0.3.10"
   },
   "engines": {

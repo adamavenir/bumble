@@ -4,10 +4,10 @@
   "main": "blog.js",
   "description": "demo bumble blog using hapi",
   "dependencies": {
-    "bumble": "^2.0.0",
-    "electricfence": "0.0.3",
-    "good": "^2.0.0",
-    "hapi": "^4.0.0",
+    "bumble": "^2.1.0",
+    "electricfence": "1.1.0",
+    "good": "^2.2.0",
+    "hapi": "^6.2.0",
     "jade": "^1.3.1"
   },
   "author": {
