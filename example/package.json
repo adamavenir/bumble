@@ -19,6 +19,7 @@
     "node": "0.10.x"
   },
   "scripts": {
+    "start": "node blog.js",
     "postinstall": "npm link ../../bumble",
     "postupdate": "npm link ../../bumble"
   }

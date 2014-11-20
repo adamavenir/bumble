@@ -11,7 +11,9 @@ block body
             h1(style="margin-top: 0;")= post.title         
           .large-2.hide-for-small.columns
         .row
-          .postContent!= post.postBody
+          .postContent!= post.introBody
+          .postContent
+            p: a(href= post.url) Continue reading »
     .row.pages
       .paginationWrap           
         include pagination

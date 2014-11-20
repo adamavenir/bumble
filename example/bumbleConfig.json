@@ -8,5 +8,6 @@
   "rssUrl": "http://adambrault.com/rss",
   "postDir": "posts",
   "blogHome": "/",
-  "maxPosts": 10
+  "maxPosts": 10,
+  "introPostWords": 100
 }
