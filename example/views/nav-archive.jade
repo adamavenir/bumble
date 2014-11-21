@@ -1,4 +1,9 @@
 nav
-  a(href="/2013") 2013
-  a(href="/2012") 2012
-  a(href="/2011") 2011
+  each months, year in locals.archives
+    li
+      a(href="/#{year}") #{year}
+    if (locals.archiveYear == year)
+      ul
+        each month in months
+          li
+            a(href='/#{year}/#{month}') #{month}
