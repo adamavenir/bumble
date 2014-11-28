@@ -68,7 +68,8 @@ Check out the [full example](https://github.com/adambrault/bumble/tree/master/ex
   "rssUrl": "http://example.com/feed/rss",
   "postDir": "posts",
   "blogHome": "/",
-  "maxPosts": "10",
+  "maxPosts": 10,
+  "introPostWords": 100,
   "browserCache": 3600000
   "labels": ["blog", "http"]
 }
@@ -76,11 +77,17 @@ Check out the [full example](https://github.com/adambrault/bumble/tree/master/ex
 
 ``maxPosts`` will set the maximum number of posts available on the main page and RSS feed.
 
+``introPostWords`` will truncate the opening paragraphs at 100 words, including *at least* the opening paragraph, and never cutting off a line mid-sentence.
+
 ``blogHome`` will accept routes like ``/`` or ``/blog`` or ``/somethingelse``.
 
 ``labels`` can be a string or an array, or not provided at all.  Please see <a href='http://hapijs.com/api/v6.2.0#pluginselectlabels'>Hapi API docs</a> for more info on labels
 
-Put a markdown file in the ``blog`` directory (or whichever you've chosen in ``postDir``) in this format:
+Put markdown files in the ``blog`` directory (or whichever you've chosen in ``postDir``)
+
+If you add to the metadata (1) a proper timestamp to the ``date`` field in metadata, *and/or* (2) a hyphenated version of the url name to the ``slug`` field, then (respectively of which you add) it doesn't matter what you name the markdown files.
+
+Alternatively, to automatically date and slugify your urls, name your files in this format:
 
 ```
 YYYY-MM-DD-this-is-the-name-of-the-post.md
