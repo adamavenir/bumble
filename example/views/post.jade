@@ -11,4 +11,13 @@ block body
         .large-2.hide-for-small.columns
       .row
         .postContent!= locals.postData.postBody
+      .row
+        .postContent
+          hr
+          p Related posts:
+          ul
+            for post in locals.matchTags
+              li
+                a(href= post.permalink)= post.title
+
     include footer
