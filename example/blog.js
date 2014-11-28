@@ -15,7 +15,7 @@ var serverOptions = {
     }
 };
 
-var server = new Hapi.Server(3000, serverOptions);
+var server = new Hapi.Server(3003, serverOptions);
 
 server.pack.register([
     { plugin: Bumble, options: config },
