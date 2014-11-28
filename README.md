@@ -70,7 +70,7 @@ Check out the [full example](https://github.com/adambrault/bumble/tree/master/ex
   "blogHome": "/",
   "maxPosts": 10,
   "introPostWords": 100,
-  "browserCache": 3600000
+  "browserCache": 3600000,
   "labels": ["blog", "http"]
 }
 ```
