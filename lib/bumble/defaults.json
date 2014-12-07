@@ -9,5 +9,7 @@
   "postDir": "posts",
   "blogHome": "/",
   "maxPosts": 10,
-  "introPostWords": 100
+  "introPostWords": 100,
+  "maxRelated": 5,
+  "randomRelated": true
 }
