@@ -16,7 +16,7 @@ block body
           hr
           p Related posts:
           ul
-            for post in locals.matchTags
+            for post in locals.postData.matchTags
               li
                 a(href= post.permalink)= post.title
 
