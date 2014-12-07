@@ -70,6 +70,8 @@ Check out the [full example](https://github.com/adambrault/bumble/tree/master/ex
   "blogHome": "/",
   "maxPosts": 10,
   "introPostWords": 100,
+  "maxRelated": 5,
+  "randomRelated": true,
   "browserCache": 3600000,
   "labels": ["blog", "http"]
 }
@@ -78,6 +80,10 @@ Check out the [full example](https://github.com/adambrault/bumble/tree/master/ex
 ``maxPosts`` will set the maximum number of posts available on the main page and RSS feed.
 
 ``introPostWords`` will truncate the opening paragraphs at 100 words, including *at least* the opening paragraph, and never cutting off a line mid-sentence.
+
+``maxRelated`` limits the number of related posts shown in a single post view.
+
+``randomRelated`` determines whether related posts should be shuffled or not. (If false, this will instead list your maximum of related posts in order of recency.)
 
 ``blogHome`` will accept routes like ``/`` or ``/blog`` or ``/somethingelse``.
 
