@@ -16,6 +16,7 @@ block body
           .postContent
             hr
             p Related posts:
+            p= locals.relatedPosts
             ul
               for post in locals.relatedPosts
                 li

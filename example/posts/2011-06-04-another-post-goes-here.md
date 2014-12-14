@@ -3,6 +3,7 @@ date: 2011-06-04 22:04:39 GMT
 slug: another-post-goes-here
 tags: sample
 title: Another post goes here
+evergreen: true
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus rutrum bibendum ipsum, vitae fermentum nibh cursus sed. Etiam justo nulla, congue quis elit non, rhoncus viverra nulla. Quisque et erat luctus, laoreet justo eget, euismod risus. Proin vestibulum mi non risus feugiat faucibus. Pellentesque commodo augue quis eros fermentum, et euismod dolor facilisis. 
