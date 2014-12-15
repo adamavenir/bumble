@@ -11,8 +11,8 @@ block body
         .large-2.hide-for-small.columns
       .row
         .postContent!= locals.postData.postBody
-        if locals.postData.cta
-          .postContent!= locals.postData.cta
+        if locals.postData.callToAction
+          .postContent!= locals.postData.callToAction
       if locals.relatedPosts
         .row
           .postContent
