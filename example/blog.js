@@ -1,31 +1,43 @@
 var Hapi = require('hapi');
 var config = require('./bumbleConfig.json');
-var Jade = require('jade');
-var Bumble = require('bumble');
-var Good = require('good');
-var ElectricFence = require('electricfence');
 
-var serverOptions = {
-    views: {
-        engines: {
-            jade: Jade
-        },
-        isCached: false,
-        path: 'views'
+var server = new Hapi.Server();
+server.connection({ port: 3003 });
+
+server.views({
+    engines: {
+        jade: require('jade')
+    },
+    isCached: false,
+    path: 'views'
+});
+
+server.register([
+    {
+        register: require('../'), // use require('bumble') in real world
+        options: config
+    },
+    {
+        register: require('good'),
+        options: {
+            reporters: [{
+                reporter: require('good-console'),
+                args: [{ log: '*', response: '*' }]
+            }]
+        }
+    },
+    {
+        register: require('electricfence'),
+        options: {
+            path: 'public',
+            url: '/'
+        }
     }
-};
-
-var server = new Hapi.Server(3003, serverOptions);
-
-server.pack.register([
-    { plugin: Bumble, options: config },
-    { plugin: Good, options: {} },
-    { plugin: ElectricFence, options: {path: 'public', url: '/'} }
 ], function (err) {
     if (err) throw err;
 
     server.start(function () {
-        console.log('bumble running on the year ' + server.info.port);
+        server.log('info', 'bumble running on the year ' + server.info.port);
     });
 });
 
