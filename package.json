@@ -11,7 +11,7 @@
     "gravatar": "^1.0.6",
     "highlight.js": "^8.1.0",
     "js-yaml": "^3.1.0",
-    "jsonfile": "^1.2.0",
+    "jsonfile": "^2.0.0",
     "marked": "^0.3.2",
     "slugger": "^1.0.0",
     "sugar": "^1.4.1",
@@ -20,11 +20,11 @@
     "wtchr": "0.0.1"
   },
   "devDependencies": {
-    "bucker": "^1.0.9",
-    "hapi": "^6.0.0",
-    "jade": "~1.0.0",
-    "lab": "^3.2.1",
-    "precommit-hook": "^0.3.10"
+    "code": "^1.2.1",
+    "hapi": "^8.1.0",
+    "jade": "^1.9.0",
+    "lab": "^5.2.0",
+    "precommit-hook": "^1.0.7"
   },
   "engines": {
     "node": "0.10.x"
