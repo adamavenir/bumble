@@ -5,6 +5,8 @@ tags: sample
 title: Well, yep, another post!
 ---
 
+This post has a file name that doesn't match the metadata because the metadata takes precedence.
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 
 Vivamus rutrum bibendum ipsum, vitae fermentum nibh cursus sed. Etiam justo nulla, congue quis elit non, rhoncus viverra nulla. Quisque et erat luctus, laoreet justo eget, euismod risus. 
